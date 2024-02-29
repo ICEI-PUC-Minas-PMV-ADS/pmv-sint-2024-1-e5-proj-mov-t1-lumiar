@@ -1,23 +1,23 @@
-# TÍTULO DO PROJETO
+# Apadrinhamento
 
-`CURSO`
+`Tecnologia em Sistemas para Internet`
 
-`DISCIPLINA`
+`Desenvolvimento de Aplicações Móveis`
 
-`SEMESTRE`
+`5º semestre`
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Cristhyam Augusto Soares Paraiso
+* Gabriel Rodrigues Ferro
+* Leticia Rose de Santana Lopes
+* Maria Eduarda Ribeiro de Almeida
 
 ## Orientador
 
-* Nome completo do professor 1
+* Udo Fritzke Junior
 
 ## Instruções de utilização
 
