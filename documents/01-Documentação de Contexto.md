@@ -38,4 +38,6 @@ Relacionar a situação-problema da organização com o impacto social esperado 
 
 ## Descrição do Parceiro
 
-Apresente uma descrição resumida sobre a organização onde o projeto será desenvolvido para que possa ser compreendido o cenário sistema sociotécnico.
+O [Instituto BH Futuro ](https://institutobhfuturo.com.br/) atua no Aglomerado da Serra, uma das áreas mais vulneráveis e carentes da cidade de Belo Horizonte. Tem como objetivo promover o desenvolvimento social, cultural e educacional de jovens e adolescentes que vivem nessa região, por meio de projetos e programas que visam à formação pessoal e profissional desses indivíduos. 
+
+Os projetos incluem atividades nas áreas de esporte, cultura, arte e educação. O trabalho é desenvolvido em parceria com diversos setores da sociedade, como empresas, organizações governamentais e não governamentais, escolas e universidades, visando a construção de uma rede de apoio para o desenvolvimento social e educacional dos jovens e adolescentes do Aglomerado da Serra. 
