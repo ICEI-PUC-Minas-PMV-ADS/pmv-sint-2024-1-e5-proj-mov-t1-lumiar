@@ -4,7 +4,22 @@
 
 Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+## Personas
+
+### 1 - Lucas Pinheiro, 17 anos, Estudante em busca de apoio financeiro: 
+Lucas é um estudante do ensino médio em rede pública que recebe apoio integral de uma ONG local. Ele sonha em ser médico, mas sua família não tem condições de pagar um cursinho pré-vestibular. Além do apoio emocional e participação em atividades oferecidas pela ONG, Lucas está em busca de alguém que possa custear seu curso preparatório para o vestibular de medicina. Ele está determinado a alcançar seu objetivo e se tornar um médico bem-sucedido. 
+
+### 2 - Juliano, 15 anos, Criança Carente em Busca de Apoio: 
+Juliano é um jovem que vive em uma comunidade carente de Belo Horizonte. Ele vem de uma família com recursos financeiros limitados e enfrenta desafios em sua educação. Juliano tem muitos desejos para o futuro, mas sente-se desanimado devido às dificuldades que enfrenta. Ele busca apoio emocional, atividades e mentorias em uma ONG da sua comunidade. 
+
+### 3 - Anne Isabelle, 55 anos, Fundadora de ONG de Assistência Infantil: 
+Anne é uma empreendedora que fundou uma ONG voltada para ajudar crianças em situação de vulnerabilidade. Ela é apaixonada por fazer a diferença na vida desses jovens e está constantemente em busca de maneiras de expandir os serviços e recursos oferecidos pela organização. Anne está interessada em parcerias que possam fornecer apoio financeiro e oportunidades educacionais para as crianças atendidas pela ONG. 
+
+### 4 - Edvan Araújo, 31 anos, Engenheiro de produção: 
+Edvan é um profissional reconhecido no mercado por sua humildade. Ele teve uma infância simples e sem muitos recursos investidos na sua educação. Atualmente, ele busca instituições que trabalhem com jovens que carecem de recursos educacionais, assim como ele quando menor. Ele está disposto a comprometer uma parte de sua renda mensal para apoiar um ou mais jovens em necessidade. 
+
+### 5 - Marta, 45 anos, Mãe Solidária: 
+Marta é uma mãe de dois filhos adolescentes. Ela sempre ensinou seus filhos sobre empatia e solidariedade. Marta está interessada em encontrar oportunidades para sua família se envolver em atividades de caridade e apoio a crianças carentes na sua comunidade, oferecendo apoio financeiro, mentoria e oportunidades de aprendizado. Ela busca uma maneira de tornar essa experiência significativa e educativa para seus próprios filhos, mas não sabe como encontrar uma organização confiável para realizar as doações. 
 
 ## Arquitetura e Tecnologias
 
