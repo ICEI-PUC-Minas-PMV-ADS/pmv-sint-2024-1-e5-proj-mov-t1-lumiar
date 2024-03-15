@@ -1,36 +1,26 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+Em muitas comunidades ao redor do mundo, crianças e adolescentes carentes enfrentam desafios significativos em seu desenvolvimento pessoal, educacional e emocional. A falta de recursos financeiros e suporte familiar adequado pode resultar em um ciclo de desvantagem que se perpetua ao longo da vida. Nessas circunstâncias, intervenções eficazes são essenciais para oferecer esperança e oportunidades para esses jovens vulneráveis. 
+
+O aplicativo de "Apadrinhamento de Crianças e Adolescentes Carentes" surge como uma resposta inovadora e crucial a essa necessidade. Através dessa plataforma, pessoas de qualquer lugar do mundo têm a oportunidade de desempenhar um papel ativo na transformação da vida desses jovens, oferecendo-lhes não apenas suporte financeiro, mas também orientação, mentoria e, mais importante, um senso de pertencimento e valor. 
+
+Além disso, um aplicativo de apadrinhamento de crianças e adolescentes carentes pode ajudar a sensibilizar a comunidade sobre as necessidades desses jovens ao unir esforços e criar uma rede de solidariedade, podemos ter um ambiente onde todos os jovens tenham a oportunidade de alcançar seu pleno potencial, independentemente de suas circunstâncias iniciais. 
+
+Com isso, o objetivo desse projeto é apresentar um aplicativo que visa o desenvolvimento desses jovens em situação de vulnerabilidade, e que tem como ponto inicial estabelecer uma ponte eficaz para a comunicação entre pessoas que querem participar de uma ação social, e instituições de apoio, criando uma rede na qual crianças são apadrinhadas, assegurando que os recursos sejam direcionados para elas, contribuindo assim para a construção de uma sociedade mais justa e inclusiva. 
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+Na sociedade atual, crianças carentes frequentemente enfrentam a falta de oportunidades essenciais para seu desenvolvimento devido à escassez de recursos e apoio. Essa lacuna cria um ciclo de desvantagens que impacta negativamente seu futuro e contribui para disparidades socioeconômicas persistentes. A falta de recursos financeiros e a negligência das necessidades básicas são desafios comuns que muitos desses jovens encaram, o que pode levar a consequências devastadoras, incluindo a interrupção da educação. Este projeto busca resolver a lacuna entre aqueles que desejam contribuir para ações sociais e as instituições que oferecem suporte para crianças e adolescentes carentes. 
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
-
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+O objetivo desse projeto é desenvolver um aplicativo proporcionando uma plataforma eficaz e acessível para conectar doadores, padrinhos e instituições de apoio, com o intuito de oferecer suporte direto e recursos essenciais para crianças em situação de vulnerabilidade, contribuindo assim para a melhoria de suas condições de vida e promoção de um ambiente mais inclusivo e solidário. 
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+O aplicativo tem caráter social e a intenção é de dar início a um projeto que promova o interesse dos usuários para com a causa, que visa a proteção e cuidado com os jovens de periferia, e até mesmo os que são em situação de vulnerabilidade social e buscam por um futuro diferente. Incentivando assim, a educação e a participação ativa das pessoas em causas sociais.  
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Ao examinar diversos projetos e softwares com objetivos semelhantes, é evidente a existência de muitas similaridades, especialmente no que diz respeito ao propósito geral. No entanto, buscamos nos distinguir ao atuarmos como uma ponte entre instituições que não possuem recursos para desenvolverem uma plataforma digital, e padrinhos que podem acessar uma ampla gama de opções de instituições em um único local. Além de ser uma aplicação móvel, diferenciando-se da maioria que opera por meio de websites, proporcionamos uma acessibilidade tanto para as instituições quanto para os padrinhos.  
 
 ## Relação com a Extensão Universitária
 
