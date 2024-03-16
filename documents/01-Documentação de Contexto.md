@@ -24,7 +24,9 @@ Ao examinar diversos projetos e softwares com objetivos semelhantes, é evidente
 
 ## Relação com a Extensão Universitária
 
-Relacionar a situação-problema da organização com o impacto social esperado com a implantação do sistema sociotécnico.
+Desenvolver e implementar o aplicativo de Apadrinhamento está ligado ao compromisso da extensão universitária em promover o desenvolvimento social e a melhoria da qualidade de vida da comunidade, além de representar uma oportunidade valiosa para aplicar os conhecimentos adquiridos ao longo do curso. Essa iniciativa demonstra nosso compromisso em utilizar os ensinamentos acadêmicos para enfrentar desafios sociais concretos e fortalece os laços entre a universidade e a sociedade.
+
+O aplicativo funcionará como uma ferramenta poderosa para conectar aqueles que desejam contribuir com o desenvolvimento desses jovens e as instituições de apoio, promovendo uma interação significativa com a comunidade. Essa abordagem colaborativa e voltada para o engajamento social reflete os ideais da Extensão Universitária, que busca estabelecer vínculos e sanar as necessidades reais da população.
 
 ## Descrição do Parceiro
 
