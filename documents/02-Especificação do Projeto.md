@@ -1,9 +1,5 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
-
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
 ## Personas
 
 ### 1 - Lucas Pinheiro, 17 anos, Estudante em busca de apoio financeiro: 
@@ -30,10 +26,7 @@ A arquitetura do projeto segue um modelo de aplicação de três camadas, separa
 
 ## Project Model Canvas
 
-Colocar a imagem do modelo construído apresentando a proposta de solução.
-
-> **Links Úteis**:
-> Disponíveis em material de apoio do projeto
+![Project Model Canvas](/documents/img/PMC.png "PMC")
 
 ## Requisitos
 
