@@ -23,7 +23,10 @@ Marta é uma mãe de dois filhos adolescentes. Ela sempre ensinou seus filhos so
 
 ## Arquitetura e Tecnologias
 
-o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
+A arquitetura do projeto segue um modelo de aplicação de três camadas, separando claramente as responsabilidades entre o back end e o front end, proporcionando uma maior modularidade e facilitando a manutenção e o desenvolvimento contínuo.
+* Back End: Node.js
+* Banco de Dados: MongoDB
+* Front End: React Native
 
 ## Project Model Canvas
 
@@ -87,16 +90,15 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 > - [Astah](https://astah.net/)
 > - [Diagrams](https://app.diagrams.net/)
 
+
 ## Modelo ER (Projeto Conceitual)
+![Group 13](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-apadrinhamento/assets/102738785/7bc66a9d-b55f-4ccd-b0ad-8d718a7cfc2a)
 
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
-
-Sugestão de ferramentas para geração deste artefato: LucidChart e Draw.io.
-
-A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
-
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
 ## Projeto da Base de Dados
 
-O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
+
+![Group 14 (1)](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-apadrinhamento/assets/102738785/77ec6726-eec3-4b34-b29d-f1dfca0eeac0)
+
+
+
