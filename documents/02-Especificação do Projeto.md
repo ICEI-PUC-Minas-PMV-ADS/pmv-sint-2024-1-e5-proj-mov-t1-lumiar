@@ -63,7 +63,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
 |RNF-001| O aplicativo deve ser desenvolvido na linguagem Node.js e JS utilizando a biblioteca React Native | ALTA | 
-|RNF-002| O aplicativo deve utilizar banco de dados ão relacional |  ALTA | 
+|RNF-002| O aplicativo deve utilizar banco de dados não relacional |  ALTA | 
 |RNF-003| A aplicação deverá ser móvel  |  ALTA | 
 |RNF-004| O sistema deve ser flexível e capaz de se adaptar às mudanças nos requisitos e na estrutura organizacional. |  ALTA | 
 |RNF-005| O sistema deve ser responsivo para rodar em dispositivos móveis |  MÉDIA | 
