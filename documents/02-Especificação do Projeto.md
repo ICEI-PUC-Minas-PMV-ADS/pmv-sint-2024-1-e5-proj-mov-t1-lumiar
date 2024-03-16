@@ -54,15 +54,16 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-009| Permitir que instituição cadastre crianças para apadrinhamento   |  |
 |RF-010| Permitir que instituição edite informações sobre a criança  |  |
 |RF-011| Permitir que a instituição remova a criança da lista |  |
-
-
+|RF-012| Permitir que a instituição altere informações sobre ela mesma |  |
+|RF-013| Permitir que a instituição possa ter uma visualização clara das crianças apadrinhadas |  |
+|RF-014| Permitir que a instituição possa ver os usuários que apadrinharam as crianças |  |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
 |RNF-001| O aplicativo deve ser desenvolvido na linguagem Node.js e JS utilizando a biblioteca React Native | ALTA | 
-|RNF-002| O aplicativo deve utilizar banco de dados relacional |  ALTA | 
+|RNF-002| O aplicativo deve utilizar banco de dados ão relacional |  ALTA | 
 |RNF-003| A aplicação deverá ser móvel  |  ALTA | 
 |RNF-004| O sistema deve ser flexível e capaz de se adaptar às mudanças nos requisitos e na estrutura organizacional. |  ALTA | 
 |RNF-005| O sistema deve ser responsivo para rodar em dispositivos móveis |  MÉDIA | 
