@@ -4,6 +4,7 @@
   "description": "Projeto que tem como fundamento o apadrinhamento de crianças carentes",
   "main": "app.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "dependencies": {
     "env": "^0.0.2",
     "express": "^4.19.2",
-    "mongoose": "^8.2.4"
+    "mongoose": "^8.2.4",
+    "zod": "^3.22.4"
   }
 }
