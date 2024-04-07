@@ -1,7 +1,15 @@
-const GodFatherSchema = require("../schemas/godfather-schema");
+const GodfatherSchema = require("../schemas/godfather-schema");
 const MongoDB = require("../database/mongodb");
 
 const connection = MongoDB.createConnection();
-const GodFather = connection.model("godfather", GodFatherSchema, "godfathers");
+const Godfather = connection.model("godfather", GodfatherSchema, "godfathers");
 
-module.exports = GodFather;
+Godfather.updateById = async (idGodfather, bodyToUpdate) => {
+  return Godfather.findOneAndUpdate({ _id: idGodfather }, bodyToUpdate).lean();
+};
+
+Godfather.findByName = async (name) => {
+  return Godfather.findOne({ name }).lean();
+};
+
+module.exports = Godfather;
