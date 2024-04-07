@@ -4,6 +4,7 @@ module.exports = new Schema({
   name: { type: String, default: null },
   creationData: { type: Date, default: null },
   email: { type: String, default: null },
+  CNPJ: { type: String, default: null },
   children: { type: Map, default: {} },
   description: { type: String, default: null },
   roll: { type: String, default: null },
