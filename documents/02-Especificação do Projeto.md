@@ -37,19 +37,19 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
 |RF-001| Permitir que padrinho/instituição se cadastre no sistema | ALTA | 
-|RF-002| Permitir que padrinho/instituição faça login   |  |
-|RF-003| Permitir que padrinho navegue pela lista de instituições  |  |
-|RF-004| Permitir que padrinho veja todas as crianças cadastradas na instituição selecionada |  |
-|RF-005| Permitir que padrinho veja informações sobre a criança selecionada |  |
-|RF-006| Permitir que padrinho faça apadrinhamento da criança escolhida |  |
-|RF-007| Encaminhar padrinho para página de pagamento   |  |
-|RF-008| Permitir que padrinho navege pela lista de crianças apadrinhadas   |  |
-|RF-009| Permitir que instituição cadastre crianças para apadrinhamento   |  |
-|RF-010| Permitir que instituição edite informações sobre a criança  |  |
-|RF-011| Permitir que a instituição remova a criança da lista |  |
-|RF-012| Permitir que a instituição altere informações sobre ela mesma |  |
-|RF-013| Permitir que a instituição possa ter uma visualização clara das crianças apadrinhadas |  |
-|RF-014| Permitir que a instituição possa ver os usuários que apadrinharam as crianças |  |
+|RF-002| Permitir que padrinho/instituição faça login   | ALTA |
+|RF-003| Permitir que padrinho navegue pela lista de instituições  | ALTA |
+|RF-004| Permitir que padrinho veja todas as crianças cadastradas na instituição selecionada | ALTA |
+|RF-005| Permitir que padrinho veja informações sobre a criança selecionada | MEDIA |
+|RF-006| Permitir que padrinho faça apadrinhamento da criança escolhida | ALTA |
+|RF-007| Encaminhar padrinho para página de pagamento   | ALTA |
+|RF-008| Permitir que padrinho navege pela lista de crianças apadrinhadas   | MEDIA |
+|RF-009| Permitir que instituição cadastre crianças para apadrinhamento   | ALTA |
+|RF-010| Permitir que instituição edite informações sobre a criança  | MEDIA |
+|RF-011| Permitir que a instituição remova a criança da lista | MEDIA |
+|RF-012| Permitir que a instituição altere informações sobre ela mesma | MEDIA |
+|RF-013| Permitir que a instituição possa ter uma visualização clara das crianças apadrinhadas | BAIXA |
+|RF-014| Permitir que a instituição possa ver os usuários que apadrinharam as crianças | BAIXA |
 
 ### Requisitos não Funcionais
 
