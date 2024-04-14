@@ -76,13 +76,18 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 ![Diagrama de Caso de Uso](/documents/img/CDU.png "CDU")
 
 ## Modelo ER (Projeto Conceitual)
-![Group 13](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-apadrinhamento/assets/102738785/7bc66a9d-b55f-4ccd-b0ad-8d718a7cfc2a)
+
+![Modelo ER](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-lumiar/assets/102738785/1a1f0e05-c166-4d68-8b00-7ad48d50c234)
+
 
 
 ## Projeto da Base de Dados
 
+![drawSQL-image-export-2024-04-14 (4)](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-lumiar/assets/102738785/76fe7c58-1e63-475f-9811-c299db3c87ed)
 
-![Group 14 (1)](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-apadrinhamento/assets/102738785/77ec6726-eec3-4b34-b29d-f1dfca0eeac0)
+## Arquitetura de software
+
+![Group 5](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-sint-2024-1-e5-proj-mov-t1-lumiar/assets/102738785/f14e33a5-e3d4-4936-8b34-dedbb678885c)
 
 
 
