@@ -1,122 +1,111 @@
-const z = require("zod");
-const mongoose = require("mongoose");
+const z = require('zod')
+const mongoose = require('mongoose')
 
-class Validation {
-  static addressSchema = z.object({
+const addressSchema = z.object({
     street: z.string().max(50),
     district: z.string().max(50),
     state: z.string().max(50),
     country: z.string().max(50),
     cep: z.string().max(50),
-  });
+})
 
-  static godfatherSchemaValidation() {
-    const godfatherSchema = z.object({
-      name: z.string().max(100),
-      age: z.number().int().positive(),
-      email: z.string().email(),
-      cpf: z.string().refine((value) => {
-        return Validation.isValidCPF(value);
-      }),
-      donations: z.object(),
-    });
+const donationSchema = z.object({
+    value: z.number(),
+    children: z.any().refine((id) => {
+        return mongoose.Types.ObjectId.isValid(id)
+    }),
+    godfather: z.any().refine((id) => {
+        return mongoose.Types.ObjectId.isValid(id)
+    }),
+})
 
-    return godfatherSchema;
-  }
+const institutionSchema = z.object({
+    name: z.string().max(100),
+    password: z.string(),
+    creationDate: z.date(),
+    email: z.string().email(),
+    cnpj: z.string(),
+    children: z.object({}),
+    description: z.string().max(200),
+    address: addressSchema,
+    affiliation: z.boolean(),
+})
 
-  static institutionsSchemaValidation() {
-    const godfatherSchema = z.object({
-      name: z.string().max(100),
-      creationData: z.date(),
-      email: z.string().email(),
-      children: z.object(),
-      CNPJ: z.string(),
-      description: z.string().max(200),
-      roll: z.string().max(50),
-      address: Validation.addressSchema,
-      donations: z.object(),
-      affiliation: z.boolean(),
-    });
+const godfatherSchema = z.object({
+    name: z.string().max(100),
+    age: z.number().int().positive(),
+    email: z.string().email(),
+    cpf: z.string(),
+    cpf: z.any().refine((value) => {
+        const isValidCpf = isValidCPF(value)
+        return isValidCpf
+    }),
+    donations: z.object({}),
+})
 
-    return godfatherSchema;
-  }
-
-  static donationSchemaValidation() {
-    const godfatherSchema = z.object({
-      value: z.number(),
-      children: z.any().refine((id) => {
-        return mongoose.Types.ObjectId.isValid(id);
-      }),
-      godfather: z.any().refine((id) => {
-        return mongoose.Types.ObjectId.isValid(id);
-      }),
-    });
-
-    return godfatherSchema;
-  }
-
-  static validationDate(customSchema, data) {
-    const hashSchema = {
-      godfather: Validation.godfatherSchemaValidation,
-      institution: Validation.institutionsSchemaValidation,
-      donation: Validation.donationSchemaValidation,
-    };
-
-    const parsedCustomSchema = hashSchema[customSchema].safeParse(data);
-    Validation.formatErrorMessages(parsedCustomSchema);
-
-    return parsedCustomSchema;
-  }
-
-  static formatErrorMessages(validationResponse) {
+function formatErrorMessages(validationResponse) {
     if (!validationResponse.success) {
-      validationResponse.errorMessages = validationResponse.error.issues.map(
-        (error) => {
-          return `Erro de validação: O atributo ${error.path} deve ser um(a) ${error.expected} ao invés de ${error.received}`;
-        }
-      );
+        validationResponse.errorMessages = validationResponse.error.issues.map((error) => {
+            return {
+                message: `Erro de validação: O atributo ${error.path} deve ser um(a) ${error.expected} ao invés de ${error.received}`,
+                statusCode: 400,
+            }
+        })
     }
 
-    return validationResponse;
-  }
-
-  static isValidCPF(cpf) {
-    cpf = Validation.sanitizeCPF(cpf);
-
-    if (!Validation.isValidLength(cpf) || Validation.isRepeatingDigits(cpf))
-      return false;
-
-    const checkDigitOne = Validation.calculateDigit(cpf, 9);
-    if (!Validation.validateDigit(cpf, checkDigitOne, 9)) return false;
-
-    const checkDigitTwo = Validation.calculateDigit(cpf, 10);
-    return Validation.validateDigit(cpf, checkDigitTwo, 10);
-  }
-
-  static sanitizeCPF(cpf) {
-    return cpf.replace(/[^\d]/g, "");
-  }
-
-  static isValidLength(cpf) {
-    return cpf.length === 11;
-  }
-
-  static isRepeatingDigits(cpf) {
-    return /^(.)\1+$/.test(cpf);
-  }
-
-  static calculateDigit(cpf, end) {
-    let sum = 0;
-    for (let i = 0; i < end; i++) {
-      sum += parseInt(cpf.charAt(i)) * (end + 1 - i);
-    }
-    let rest = sum % 11;
-    return rest < 2 ? 0 : 11 - rest;
-  }
-
-  static validateDigit(cpf, expectedDigit, position) {
-    return parseInt(cpf.charAt(position)) === expectedDigit;
-  }
+    return validationResponse
 }
 
-module.exports = Validation;
+function isValidCPF(cpf) {
+    cpf = sanitizeCPF(cpf)
+
+    if (!isValidLength(cpf) || isRepeatingDigits(cpf)) {
+        return false
+    }
+
+    const checkDigitOne = calculateDigit(cpf, 9)
+    if (!validateDigit(cpf, checkDigitOne, 9)) return false
+
+    const checkDigitTwo = calculateDigit(cpf, 10)
+    return validateDigit(cpf, checkDigitTwo, 10)
+}
+
+function sanitizeCPF(cpf) {
+    return cpf.replace(/[^\d]/g, '')
+}
+
+function isValidLength(cpf) {
+    return cpf.length === 11
+}
+
+function isRepeatingDigits(cpf) {
+    return /^(.)\1+$/.test(cpf)
+}
+
+function calculateDigit(cpf, end) {
+    let sum = 0
+    for (let i = 0; i < end; i++) {
+        sum += parseInt(cpf.charAt(i)) * (end + 1 - i)
+    }
+    let rest = sum % 11
+    return rest < 2 ? 0 : 11 - rest
+}
+
+function validateDigit(cpf, expectedDigit, position) {
+    return parseInt(cpf.charAt(position)) === expectedDigit
+}
+
+function validationDate(customSchema, data) {
+    const hashSchema = {
+        godfather: godfatherSchema,
+        institution: institutionSchema,
+        donation: donationSchema,
+    }
+
+    const parsedCustomSchema = hashSchema[customSchema].safeParse(data)
+    formatErrorMessages(parsedCustomSchema)
+
+    return parsedCustomSchema
+}
+
+module.exports = { validationDate }
