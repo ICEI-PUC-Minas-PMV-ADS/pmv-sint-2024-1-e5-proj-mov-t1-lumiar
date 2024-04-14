@@ -1,8 +1,8 @@
-const { Router } = require("express");
-const Donation = require("../handlers/institution-handler");
+const { Router } = require('express')
+const Donation = require('../handlers/institution-handler')
 
-const routes = Router();
+const routes = Router()
 
-routes.post("/institution", Donation.createDocument);
+routes.post('/institution', Donation.createDocument)
 
-module.exports = routes;
+module.exports = routes
