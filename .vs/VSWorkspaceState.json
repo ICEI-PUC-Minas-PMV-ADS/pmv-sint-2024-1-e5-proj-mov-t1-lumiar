@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\back-end",
+    "\\src\\back-end\\src",
+    "\\src\\back-end\\src\\database",
+    "\\src\\back-end\\src\\handlers",
+    "\\src\\back-end\\src\\models",
+    "\\src\\back-end\\src\\routes",
+    "\\src\\back-end\\src\\tests",
+    "\\src\\back-end\\src\\tests\\config"
+  ],
+  "PreviewInSolutionExplorer": false
+}
