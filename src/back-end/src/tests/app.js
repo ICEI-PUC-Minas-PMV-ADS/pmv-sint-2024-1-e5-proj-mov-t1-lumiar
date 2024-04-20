@@ -1,6 +1,7 @@
 const express = require('express')
-const godfatherRoutes = require('../routes/godfather')
-const institutionRoutes = require('../routes/institution')
+const GodfatherRoutes = require('../routes/godfather')
+const InstitutionRoutes = require('../routes/institution')
+const DonationRoutes = require('../routes/donation')
 
 const app = express()
 
@@ -15,7 +16,8 @@ function onAuthenticate(req, res, next) {
 app.use(express.json())
 app.use(onAuthenticate)
 
-app.use(godfatherRoutes)
-app.use(institutionRoutes)
+app.use(GodfatherRoutes)
+app.use(InstitutionRoutes)
+app.use(DonationRoutes)
 
 module.exports = app

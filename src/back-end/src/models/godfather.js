@@ -9,7 +9,7 @@ Godfather.updateById = async (idGodfather, bodyToUpdate) => {
 }
 
 Godfather.findByName = async (name) => {
-    return Godfather.findOne({ name }).lean()
+    return Godfather.findOne({ name }, '-password').lean()
 }
 
 module.exports = Godfather

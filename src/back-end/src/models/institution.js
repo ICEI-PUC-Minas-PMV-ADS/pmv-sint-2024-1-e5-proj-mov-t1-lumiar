@@ -9,7 +9,7 @@ Institution.updateById = async (idInstitution, bodyToUpdate) => {
 }
 
 Institution.findByName = async (name) => {
-    return Institution.findOne({ name }).lean()
+    return Institution.findOne({ name }, '-password').lean()
 }
 
 module.exports = Institution
