@@ -23,7 +23,6 @@ export default function Login() {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Usuário"
-                        placeholderTextColor="#003f5c"
                     />
                 </View>
 
@@ -31,7 +30,6 @@ export default function Login() {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Senha"
-                        placeholderTextColor="#003f5c"
                         secureTextEntry={true}
                     />
                 </View>
@@ -76,7 +74,7 @@ const styles = StyleSheet.create({
     },
     inputView: {
         width: '80%',
-        backgroundColor: '#d3d3d3',
+        backgroundColor: '#E7E7E7',
         borderRadius: 25,
         height: 50,
         marginBottom: 20,
