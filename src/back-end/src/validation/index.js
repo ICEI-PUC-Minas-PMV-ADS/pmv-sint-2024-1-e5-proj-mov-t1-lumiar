@@ -8,22 +8,19 @@ const addressSchema = z.object({
     country: z.string().max(50),
     cep: z.string().max(50),
 })
+const objectIdSchema = z.string().refine((id) => mongoose.Types.ObjectId.isValid(id))
 
 const donationSchema = z.object({
     value: z.number(),
-    children: z.any().refine((id) => {
-        return mongoose.Types.ObjectId.isValid(id)
-    }),
-    godfather: z.any().refine((id) => {
-        return mongoose.Types.ObjectId.isValid(id)
-    }),
+    child: objectIdSchema,
+    godfather: objectIdSchema,
 })
 
 const institutionSchema = z.object({
     name: z.string().max(100),
     password: z.string(),
     creationDate: z.date(),
-    email: z.string().email(),
+    email: z.string().email({ message: 'Email inválido' }),
     cnpj: z.string(),
     children: z.object({}),
     description: z.string().max(200),
@@ -34,8 +31,13 @@ const institutionSchema = z.object({
 const godfatherSchema = z.object({
     name: z.string().max(100),
     age: z.number().int().positive(),
-    email: z.string().email(),
-    cpf: z.string(),
+    email: z.string().refine(
+        (value) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return emailRegex.test(value)
+        },
+        { message: 'Email inválido' },
+    ),
     cpf: z.any().refine((value) => {
         const isValidCpf = isValidCPF(value)
         return isValidCpf
@@ -43,12 +45,14 @@ const godfatherSchema = z.object({
     donations: z.object({}),
 })
 
-function formatErrorMessages(validationResponse) {
+function formatErrorMessages(validationResponse, data) {
     if (!validationResponse.success) {
         validationResponse.errorMessages = validationResponse.error.issues.map((error) => {
             return {
-                message: `Erro de validação: O atributo ${error.path} deve ser um(a) ${error.expected} ao invés de ${error.received}`,
-                statusCode: 400,
+                message: `Erro de validação: O atributo ${error.path} deve ser um(a) ${
+                    error.expected || error.path
+                } ao invés de ${error.received || data[error.path].trim()}`,
+                status: 400,
             }
         })
     }
@@ -103,7 +107,7 @@ function validationDate(customSchema, data) {
     }
 
     const parsedCustomSchema = hashSchema[customSchema].safeParse(data)
-    formatErrorMessages(parsedCustomSchema)
+    formatErrorMessages(parsedCustomSchema, data)
 
     return parsedCustomSchema
 }
