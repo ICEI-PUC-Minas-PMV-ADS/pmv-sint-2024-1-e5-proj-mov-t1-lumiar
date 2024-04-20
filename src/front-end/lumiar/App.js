@@ -1,7 +1,16 @@
-import React, { Fragment } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-import Login from './src/pages/Login';
+import Main from './src/navigations/main';
 
-export default function App() {
-  return <Login />
+const App = () => {
+
+  return (
+    <NavigationContainer>
+     <Main />
+    </NavigationContainer>
+  )
+
 }
+
+
+export default App;

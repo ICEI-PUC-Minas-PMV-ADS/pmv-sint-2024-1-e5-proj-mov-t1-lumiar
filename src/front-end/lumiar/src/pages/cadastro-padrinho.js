@@ -1,11 +1,6 @@
-import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-
-export default function Login() {
-    const navigation = useNavigation();
-
+export default function CadastroPadrinho() {
     return (
 
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -16,13 +11,36 @@ export default function Login() {
             />
 
             <View style={styles.formContainer}>
-
-                <Text style={styles.loginTxt}>Login</Text>
+                <Text style={styles.signUpTxt}>Cadastre-se</Text>
 
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.inputText}
-                        placeholder="Usuário"
+                        placeholder="Nome"
+                        placeholderTextColor="#003f5c"
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder="E-mail"
+                        placeholderTextColor="#003f5c"
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder="CPF"
+                        placeholderTextColor="#003f5c"
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder="Data de nascimento"
                         placeholderTextColor="#003f5c"
                     />
                 </View>
@@ -36,18 +54,18 @@ export default function Login() {
                     />
                 </View>
 
-                <TouchableOpacity>
-                    <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
-                </TouchableOpacity>
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder="Confirme sua senha"
+                        placeholderTextColor="#003f5c"
+                        secureTextEntry={true}
+                    />
+                </View>
 
-                <TouchableOpacity style={styles.btnLogin}>
-                    <Text style={styles.loginTextBtn}>Acessar</Text>
+                <TouchableOpacity style={styles.btnRegister}>
+                    <Text style={styles.registerTextBtn}>Cadastrar</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('CadastroPadrinho')}>
-                    <Text style={styles.registerTextBtn}>Criar conta</Text>
-                </TouchableOpacity>
-
             </View>
 
         </KeyboardAvoidingView>
@@ -67,7 +85,22 @@ const styles = StyleSheet.create({
         height: 300,
         resizeMode: 'contain'
     },
-    loginTxt: {
+    formContainer: {
+        width: '80%',
+        backgroundColor: '#ffffff',
+        alignItems: 'center',
+        borderRadius: 25,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginBottom: 60,
+    },
+    signUpTxt: {
         fontWeight: 'regular',
         fontSize: 40,
         color: '#383839',
@@ -87,7 +120,7 @@ const styles = StyleSheet.create({
         height: 50,
         color: '#000000'
     },
-    btnLogin: {
+    btnRegister: {
         width: '80%',
         backgroundColor: '#C693C6',
         borderRadius: 25,
@@ -96,41 +129,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 10
     },
-    btnRegister: {
-        width: '80%',
-        backgroundColor: '#ffffff',
-        borderRadius: 25,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 10,
-        borderColor: '#C693C6',
-        borderWidth: 2,
-    },
     registerTextBtn: {
-        color: '#000000'
+        color: '#ffffff'
     },
-    loginTextBtn: {
-        color: '#ffffff',
-    },
-    forgotPassword: {
-        color: '#007bff',
-        fontSize: 14,
-        marginBottom: 10
-    },
-    formContainer: {
-        width: '80%',
-        backgroundColor: '#ffffff',
-        alignItems: 'center',
-        borderRadius: 25,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    }
-
 });
