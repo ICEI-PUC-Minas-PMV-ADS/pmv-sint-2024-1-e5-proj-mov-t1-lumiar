@@ -1,3 +1,7 @@
+const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
 const GodfatherModel = require('../models/godfather')
 const { validationDate } = require('../validation')
 
@@ -6,12 +10,49 @@ class Godfather {
         const { data, errorMessages } = validationDate('godfather', payload)
         if (errorMessages) {
             throw {
-                statusCode: 400,
-                message: errorMessages,
+                status: 400,
+                message: errorMessages.map((value) => {
+                    return value.message
+                }),
             }
         }
 
         return data
+    }
+
+    static async authLogin(req, res) {
+        const { email, password } = req.body
+
+        if (!email || !password) {
+            return res.status(422).json({ msg: `${email} e ${password} são obrigatórios` })
+        }
+
+        const godfather = await Godfather.findOne({ email: email })
+        if (!godfather) {
+            return res.status(404).json({ msg: 'Usuário não encontrado!' })
+        }
+        const checkPassword = await bcrypt.compare(password, godfather.password)
+
+        if (!checkPassword) {
+            return res.status(422).json({ msg: 'Senha inválida' })
+        }
+
+        try {
+            const secret = process.env.SECRET
+            const token = jwt.sign(
+                {
+                    id: godfather._id,
+                },
+                secret,
+            )
+
+            res.status(200).json({ msg: 'Autenticação realizada com sucesso', token })
+
+        } catch (err) {
+            res
+                .status(500)
+                .json({ msg: 'Houve um erro no servidor, tente novamente' })
+        }
     }
 
     static async createDocument(req, res) {
@@ -29,16 +70,16 @@ class Godfather {
             return res.status(200).json(createdGodfather)
         } catch (error) {
             console.error('Error', error)
-            return res.status(400).json({ error: error.message })
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao criar documento' })
         }
     }
 
     static async updateDocument(req, res) {
         const body = req.body
         const { id: idGodfather } = req.params
-        Godfather.validateAndFormatGodfather(body)
 
         try {
+            Godfather.validateAndFormatGodfather(body)
             const updatedGodfather = await GodfatherModel.updateById(idGodfather, body)
             return res.status(200).json(updatedGodfather)
         } catch (error) {
@@ -57,12 +98,17 @@ class Godfather {
 
     static async getDocumentById(req, res) {
         const { id: idGodfather } = req.params
+        if (!mongoose.Types.ObjectId.isValid(idGodfather)) {
+            return res.status(404).json({ message: `${idGodfather} não é um id válido` })
+        }
 
         try {
-            const godfather = await GodfatherModel.findById(idGodfather)
+            const godfather = await GodfatherModel.findById(idGodfather, '-password')
+
             if (!godfather) {
-                res.status(404).json({ error: `padrinho com id ${idGodfather} não encontrado` })
+                return res.status(404).json({ message: `padrinho com id ${idGodfather} não encontrado` })
             }
+
             return res.status(200).json(godfather)
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
@@ -75,7 +121,7 @@ class Godfather {
         try {
             const godfather = await GodfatherModel.findByName(godfatherName)
             if (!godfather) {
-                res.status(404).json({ error: `Padrinho com nome ${godfatherName} não encontrado` })
+                return res.status(404).json({ message: `Padrinho com nome ${godfatherName} não encontrado` })
             }
             return res.status(200).json(godfather)
         } catch (error) {
@@ -92,7 +138,7 @@ class Godfather {
             })
 
             if (!godfather) {
-                res.status(404).json({ error: `Padrinho com id ${idGodfather} não encontrado` })
+                return res.status(404).json({ error: `Padrinho com id ${idGodfather} não encontrado` })
             }
 
             return res.status(200).json(godfather)
