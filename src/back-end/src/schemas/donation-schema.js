@@ -5,5 +5,4 @@ module.exports = new Schema({
     children: Schema.Types.ObjectId,
     godfather: Schema.Types.ObjectId,
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: null },
 })
