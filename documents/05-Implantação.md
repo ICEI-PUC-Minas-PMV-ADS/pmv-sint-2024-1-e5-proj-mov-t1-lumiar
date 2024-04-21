@@ -34,7 +34,12 @@
 | POST   | /create-donation                   | Cria uma nova doação.                         |
 | GET    | /get-donation/sponsor/:id          | Obtém todas as doações por ID específico do patrocinador. |
 | GET    | /get-donation/child/:id            | Obtém todas as doações por ID específico da criança. |
-
+| GET    | /child/institution/:id             | Obtém todos os documentos de crianças por ID específico da instituição. |
+| GET    | /child/:id                         | Obtém um documento de criança pelo ID específico. |
+| GET    | /child/name/:name                  | Obtém um documento de criança pelo nome específico. |
+| POST   | /child                             | Cria um novo documento de criança.            |
+| PUT    | /child/:id                         | Atualiza um documento de criança pelo ID específico. |
+| DELETE | /child/:id                         | Exclui um documento de criança pelo ID específico. |
 
 
 •	Apresentar o planejamento de evolução da aplicação.
