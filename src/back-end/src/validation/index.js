@@ -46,6 +46,17 @@ const sponsorSchema = z.object({
     password: z.string(),
 })
 
+/*
+const childrenSchema = z.object({
+    name: z.string().max(100),
+    age: z.number().int().positive(),
+    description: z.string().max(200),
+    entryData: z.string(),
+    institution: z.object({}),
+    address: addressSchema,
+})*/
+
+
 function formatErrorMessages(validationResponse, data) {
     if (!validationResponse.success) {
         validationResponse.errorMessages = validationResponse.error.issues.map((error) => {
