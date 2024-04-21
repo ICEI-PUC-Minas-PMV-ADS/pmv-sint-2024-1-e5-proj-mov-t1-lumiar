@@ -1,8 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from '../pages/login';
+import Login from '../pages/Login';
 import CadastroPadrinho from '../pages/cadastro-padrinho';
+import ProfileInstitution from '../pages/ProfileInstitution';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,14 @@ const Main = () => {
             <Stack.Screen
                 name="CadastroPadrinho"
                 component={CadastroPadrinho}
+                options={{
+                    header: () => null,
+                }}
+            />
+
+            <Stack.Screen
+                name="ProfileInstitution"
+                component={ProfileInstitution}
                 options={{
                     header: () => null,
                 }}
