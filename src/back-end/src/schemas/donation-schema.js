@@ -2,7 +2,7 @@ const { Schema } = require('mongoose')
 
 module.exports = new Schema({
     value: { type: Number, default: null },
-    children: Schema.Types.ObjectId,
-    godfather: Schema.Types.ObjectId,
+    child: Schema.Types.ObjectId,
+    sponsor: Schema.Types.ObjectId,
     createdAt: { type: Date, default: Date.now },
 })

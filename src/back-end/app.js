@@ -1,6 +1,8 @@
 require('dotenv').config()
+
 const express = require('express')
-const GodfatherRoutes = require('./src/routes/godfather')
+
+const SponsorRoutes = require('./src/routes/sponsor')
 const InstitutionRoutes = require('./src/routes/institution')
 const DonationRoutes = require('./src/routes/donation')
 
@@ -17,7 +19,7 @@ function onAuthenticate(req, res, next) {
 
 app.use(onAuthenticate)
 
-app.use(GodfatherRoutes)
+app.use(SponsorRoutes)
 app.use(InstitutionRoutes)
 app.use(DonationRoutes)
 

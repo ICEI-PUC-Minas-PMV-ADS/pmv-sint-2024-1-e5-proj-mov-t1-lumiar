@@ -1,5 +1,5 @@
 const express = require('express')
-const GodfatherRoutes = require('../routes/godfather')
+const SponsorRoutes = require('../routes/sponsor')
 const InstitutionRoutes = require('../routes/institution')
 const DonationRoutes = require('../routes/donation')
 
@@ -16,7 +16,7 @@ function onAuthenticate(req, res, next) {
 app.use(express.json())
 app.use(onAuthenticate)
 
-app.use(GodfatherRoutes)
+app.use(SponsorRoutes)
 app.use(InstitutionRoutes)
 app.use(DonationRoutes)
 

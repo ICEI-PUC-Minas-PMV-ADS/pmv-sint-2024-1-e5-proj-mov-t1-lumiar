@@ -7,7 +7,7 @@ module.exports = {
         creationDate: new Date('2023-01-01').toISOString(),
         email: 'test@example.com',
         cnpj: '12345678901234',
-        children: {
+        child: {
             John: new mongoose.Types.ObjectId(),
             Patrick: new mongoose.Types.ObjectId(),
         },

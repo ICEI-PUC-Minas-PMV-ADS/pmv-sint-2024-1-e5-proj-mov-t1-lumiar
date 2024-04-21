@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 module.exports = {
-    childrenMock: {
+    childMock: {
         name: 'João',
         age: 25,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

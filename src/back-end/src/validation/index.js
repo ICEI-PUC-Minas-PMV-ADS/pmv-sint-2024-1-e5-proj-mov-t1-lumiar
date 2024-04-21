@@ -13,7 +13,7 @@ const objectIdSchema = z.string().refine((id) => mongoose.Types.ObjectId.isValid
 const donationSchema = z.object({
     value: z.number(),
     child: objectIdSchema,
-    godfather: objectIdSchema,
+    sponsor: objectIdSchema,
 })
 
 const institutionSchema = z.object({
@@ -22,13 +22,13 @@ const institutionSchema = z.object({
     creationDate: z.date(),
     email: z.string().email({ message: 'Email inválido' }),
     cnpj: z.string(),
-    children: z.object({}),
+    child: z.object({}),
     description: z.string().max(200),
     address: addressSchema,
     affiliation: z.boolean(),
 })
 
-const godfatherSchema = z.object({
+const sponsorSchema = z.object({
     name: z.string().max(100),
     age: z.number().int().positive(),
     email: z.string().refine(
@@ -43,6 +43,7 @@ const godfatherSchema = z.object({
         return isValidCpf
     }),
     donations: z.object({}),
+    password: z.string(),
 })
 
 function formatErrorMessages(validationResponse, data) {
@@ -101,7 +102,7 @@ function validateDigit(cpf, expectedDigit, position) {
 
 function validationDate(customSchema, data) {
     const hashSchema = {
-        godfather: godfatherSchema,
+        sponsor: sponsorSchema,
         institution: institutionSchema,
         donation: donationSchema,
     }

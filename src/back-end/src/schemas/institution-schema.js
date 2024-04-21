@@ -6,7 +6,7 @@ module.exports = new Schema({
     creationDate: { type: Date, default: null },
     email: { type: String, default: null },
     cnpj: { type: String, default: null },
-    children: { type: Map, default: {} },
+    child: { type: Map, default: {} },
     description: { type: String, default: null },
     address: { type: Object, default: null },
     affiliation: { type: Boolean, default: false },

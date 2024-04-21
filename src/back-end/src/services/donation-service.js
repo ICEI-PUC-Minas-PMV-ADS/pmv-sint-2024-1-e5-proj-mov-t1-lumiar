@@ -1,13 +1,13 @@
-const ChildrenModel = require('../models/children')
-const GodfatherModel = require('../models/godfather')
+const ChildModel = require('../models/child')
+const SponsorModel = require('../models/sponsor')
 
 class DonationService {
     static async existChild(idChild) {
-        return ChildrenModel.exists({ _id: idChild })
+        return ChildModel.exists({ _id: idChild })
     }
 
-    static async existGodfather(idGodfather) {
-        return GodfatherModel.exists({ _id: idGodfather })
+    static async existSponsor(idSponsor) {
+        return SponsorModel.exists({ _id: idSponsor })
     }
 }
 
