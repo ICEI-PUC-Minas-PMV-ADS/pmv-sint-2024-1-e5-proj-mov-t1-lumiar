@@ -26,7 +26,7 @@ describe('Institution handler test', () => {
             expect(body.name).toBe(institution.name)
             expect(body.email).toBe(institution.email)
             expect(body.cnpj).toBe(institution.cnpj)
-            expect(body.children).toMatchObject(institution.children)
+            expect(body.child).toMatchObject(institution.child)
             expect(body.description).toBe(institution.description)
             expect(body.address).toMatchObject(institution.address)
             expect(body.affiliation).toBe(institution.affiliation)
