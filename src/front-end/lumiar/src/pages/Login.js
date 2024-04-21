@@ -38,7 +38,7 @@ export default function Login() {
                     <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnLogin}>
+                <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('ProfileInstitution')}>
                     <Text style={styles.loginTextBtn}>Acessar</Text>
                 </TouchableOpacity>
 
