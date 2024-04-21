@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const nodemailer = require('nodemailer')
+const bcrypt = require('bcrypt')
 
 const InstitutionModel = require('../models/institution')
 const { validationDate } = require('../validation')
@@ -47,18 +48,15 @@ class Institution {
             )
 
             res.status(200).json({ msg: 'Autenticação realizada com sucesso', token })
-
         } catch (err) {
-            res
-                .status(500)
-                .json({ msg: 'Houve um erro no servidor, tente novamente' })
+            res.status(500).json({ msg: 'Houve um erro no servidor, tente novamente' })
         }
     }
 
     static async createDocument(req, res) {
         try {
             const body = req.body
-            const { cnpj } = body
+            const { cnpj, password } = body
 
             Institution.validateAndFormatInstitution(body)
 
@@ -69,7 +67,10 @@ class Institution {
                 })
             }
 
-            const institutionCreated = await InstitutionModel.create(body)
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const institutionData = { ...body, password: hashedPassword }
+            const institutionCreated = await InstitutionModel.create(institutionData)
+
             return res.status(200).json(institutionCreated)
         } catch (error) {
             console.error('Error', error)
