@@ -67,7 +67,7 @@ class Sponsor {
             const sponsorData = { ...body, password: hashedPassword }
             const createdSponsor = await SponsorModel.create(sponsorData)
 
-            return res.status(200).json(createdSponsor)
+            return res.status(200).json(createdSponsor.toObject())
         } catch (error) {
             console.error('Error', error)
             return res.status(error.status || 500).json({ message: error.message || 'falha ao criar documento' })

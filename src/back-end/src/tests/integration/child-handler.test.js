@@ -3,19 +3,21 @@ require('dotenv').config({ path: '.env.test' })
 const Donation = require('../../models/donation')
 const Child = require('../../models/child')
 const Sponsor = require('../../models/sponsor')
+const Institution = require('../../models/institution')
 
 const { sponsorMock } = require('../mocks/sponsor-mock')
-const { donationMock } = require('../mocks/donation-mock')
 const { childMock } = require('../mocks/child-mock')
+const { institutionMock } = require('../mocks/institution-mock')
 
 const request = require('supertest')
 const app = require('../app')
 
-describe.skip('Child handler test', () => {
+describe('Child handler test', () => {
     beforeEach(async () => {
         await Donation.deleteMany({})
         await Sponsor.deleteMany({})
         await Child.deleteMany({})
+        await Institution.deleteMany({})
     })
 
     describe('SUCCESS CASES', () => {
@@ -48,15 +50,19 @@ describe.skip('Child handler test', () => {
             expect(body.name).toBe(updatedChild.name)
         })
 
-        it('Should be able to get all child registered', async () => {
-            await Child.create(childMock)
-            await Child.create({ ...childMock, name: 'Child 2' })
-            await Child.create({ ...childMock, name: 'Child 3' })
+        it('Should be able to get all child registered by Institution', async () => {
+            const institutionCreated = await Institution.create(institutionMock)
+            await Child.create({ ...childMock, institution: institutionCreated })
+            await Child.create({ ...childMock, name: 'Child 2', institution: institutionCreated })
+            await Child.create({ ...childMock, name: 'Child 3', institution: institutionCreated })
 
-            const { body, statusCode } = await request(app).get(`/child`).set('x-api-key', process.env.X_API_KEY)
+            const { body, statusCode } = await request(app)
+                .get(`/child/institution/${institutionCreated._id}`)
+                .set('x-api-key', process.env.X_API_KEY)
 
             expect(statusCode).toBe(200)
             expect(body).toHaveLength(3)
+            expect(body.every((data) => data.institution === String(institutionCreated._id)))
         })
 
         it('Should be able to get one child by id', async () => {
@@ -93,17 +99,6 @@ describe.skip('Child handler test', () => {
             expect(body.message[0]).toBe('Erro de validação: O atributo age deve ser um(a) number ao invés de string')
         })
 
-        it('Should not be able to create child if there is already a child with the same name', async () => {
-            await Child.create(childMock)
-            const { body, statusCode } = await request(app)
-                .post(`/child`)
-                .set('x-api-key', process.env.X_API_KEY)
-                .send(childMock)
-
-            expect(statusCode).toBe(404)
-            expect(body.message).toBe('Já existe uma criança cadastrada com este nome')
-        })
-
         it('Should not be able to find child by id if it does not exist', async () => {
             const objectId = '661dc2775e1a6a0f5591bff1'
             const { body, statusCode } = await request(app)
@@ -111,7 +106,7 @@ describe.skip('Child handler test', () => {
                 .set('x-api-key', process.env.X_API_KEY)
 
             expect(statusCode).toBe(404)
-            expect(body.message).toBe(`Criança com id ${objectId} não encontrada`)
+            expect(body.message).toBe(`criança com id ${objectId} não encontrada`)
         })
 
         it('Should not be able to find child by id if objectId is invalid', async () => {

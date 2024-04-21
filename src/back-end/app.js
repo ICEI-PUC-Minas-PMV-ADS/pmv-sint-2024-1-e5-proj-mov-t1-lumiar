@@ -5,6 +5,7 @@ const express = require('express')
 const SponsorRoutes = require('./src/routes/sponsor')
 const InstitutionRoutes = require('./src/routes/institution')
 const DonationRoutes = require('./src/routes/donation')
+const ChildRoutes = require('./src/routes/child')
 
 const app = express()
 app.use(express.json())
@@ -22,6 +23,7 @@ app.use(onAuthenticate)
 app.use(SponsorRoutes)
 app.use(InstitutionRoutes)
 app.use(DonationRoutes)
+app.use(ChildRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor está rodando na porta ${process.env.PORT}`)

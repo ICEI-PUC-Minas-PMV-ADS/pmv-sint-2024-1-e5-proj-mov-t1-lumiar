@@ -1,7 +1,9 @@
 const express = require('express')
+
 const SponsorRoutes = require('../routes/sponsor')
 const InstitutionRoutes = require('../routes/institution')
 const DonationRoutes = require('../routes/donation')
+const ChildRoutes = require('../routes/child')
 
 const app = express()
 
@@ -19,5 +21,6 @@ app.use(onAuthenticate)
 app.use(SponsorRoutes)
 app.use(InstitutionRoutes)
 app.use(DonationRoutes)
+app.use(ChildRoutes)
 
 module.exports = app

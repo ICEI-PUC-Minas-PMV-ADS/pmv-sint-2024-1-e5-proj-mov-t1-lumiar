@@ -54,7 +54,7 @@ class Donation {
 
             if ((await DonationService.existChild(child)) && (await DonationService.existSponsor(sponsor))) {
                 const createdDonation = await DonationModel.create(body)
-                return res.status(200).json({ data: createdDonation })
+                return res.status(200).json({ data: createdDonation.toObject() })
             }
 
             return res.status(400).json({

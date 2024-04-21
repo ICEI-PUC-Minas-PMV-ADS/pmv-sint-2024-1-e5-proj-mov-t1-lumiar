@@ -16,6 +16,15 @@ const donationSchema = z.object({
     sponsor: objectIdSchema,
 })
 
+const childSchema = z.object({
+    name: z.string(),
+    age: z.number().max(16),
+    description: z.string(),
+    institution: objectIdSchema,
+    entryData: z.date(),
+    address: addressSchema,
+})
+
 const institutionSchema = z.object({
     name: z.string().max(100),
     password: z.string(),
@@ -46,24 +55,12 @@ const sponsorSchema = z.object({
     password: z.string(),
 })
 
-/*
-const childrenSchema = z.object({
-    name: z.string().max(100),
-    age: z.number().int().positive(),
-    description: z.string().max(200),
-    entryData: z.string(),
-    institution: z.object({}),
-    address: addressSchema,
-})*/
-
-
 function formatErrorMessages(validationResponse, data) {
     if (!validationResponse.success) {
         validationResponse.errorMessages = validationResponse.error.issues.map((error) => {
             return {
-                message: `Erro de validação: O atributo ${error.path} deve ser um(a) ${
-                    error.expected || error.path
-                } ao invés de ${error.received || data[error.path].trim()}`,
+                message: `Erro de validação: O atributo ${error.path} deve ser um(a) ${error.expected || error.path
+                    } ao invés de ${error.received || data[error.path].trim()}`,
                 status: 400,
             }
         })
@@ -116,6 +113,7 @@ function validationDate(customSchema, data) {
         sponsor: sponsorSchema,
         institution: institutionSchema,
         donation: donationSchema,
+        child: childSchema,
     }
 
     const parsedCustomSchema = hashSchema[customSchema].safeParse(data)
