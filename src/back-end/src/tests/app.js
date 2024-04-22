@@ -1,3 +1,4 @@
+require('express-async-errors')
 const express = require('express')
 
 const SponsorRoutes = require('../routes/sponsor')
@@ -15,12 +16,21 @@ function onAuthenticate(req, res, next) {
     next()
 }
 
+function errorHandler(err, _, res, next) {
+    const status = err.status || 500
+    const message = err.message || 'Erro interno do servidor'
+
+    res.status(status).json({ error: status, message: message })
+}
+
 app.use(express.json())
 app.use(onAuthenticate)
+app.use(errorHandler)
 
 app.use(SponsorRoutes)
 app.use(InstitutionRoutes)
 app.use(DonationRoutes)
 app.use(ChildRoutes)
+
 
 module.exports = app
