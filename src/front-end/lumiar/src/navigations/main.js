@@ -2,8 +2,9 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../pages/Login';
-import CadastroPadrinho from '../pages/cadastro-padrinho';
+import SponsorRegistration from '../pages/SponsorRegistration';
 import ProfileInstitution from '../pages/ProfileInstitution';
+import InstitutionRegistration from '../pages/InstitutionRegistration';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +19,8 @@ const Main = () => {
                 }}
             />
             <Stack.Screen
-                name="CadastroPadrinho"
-                component={CadastroPadrinho}
+                name="SponsorRegistration"
+                component={SponsorRegistration}
                 options={{
                     header: () => null,
                 }}
@@ -28,6 +29,14 @@ const Main = () => {
             <Stack.Screen
                 name="ProfileInstitution"
                 component={ProfileInstitution}
+                options={{
+                    header: () => null,
+                }}
+            />
+
+            <Stack.Screen
+                name="InstitutionRegistration"
+                component={InstitutionRegistration}
                 options={{
                     header: () => null,
                 }}

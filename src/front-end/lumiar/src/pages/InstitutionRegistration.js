@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
-export default function CadastroPadrinho() {
+export default function InstitutionRegistration() {
     const navigation = useNavigation();
-    const [cpf, setCpf] = useState('');
+    const [cnpj, setCnpj] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -17,13 +17,13 @@ export default function CadastroPadrinho() {
                     source={require('../../assets/Lumiar_branco.png')}
                     style={styles.imageLogo}
                 />
-                <View style={styles.formContainer}>
+                <View style={styles.formContainer} >
                     <Text style={styles.signUpTxt}>Cadastre-se</Text>
 
                     <View style={styles.inputView}>
                         <TextInput
                             style={styles.inputText}
-                            placeholder="Nome"
+                            placeholder="Nome da instituição"
                             keyboardType='default'
                         />
                     </View>
@@ -39,19 +39,22 @@ export default function CadastroPadrinho() {
                     <View style={styles.inputView}>
                         <TextInputMask
                             style={styles.inputText}
-                            placeholder="CPF"
+                            placeholder="CNPJ"
                             keyboardType='numeric'
-                            type={'cpf'}
-                            value={cpf}
-                            onChangeText={text => setCpf(text)}
+                            type={'cnpj'}
+                            value={cnpj}
+                            onChangeText={text => setCnpj(text)}
                         />
                     </View>
 
-                    <View style={styles.inputView}>
+                    <View style={styles.inputView}
+                        height={100}
+                    >
                         <TextInput
                             style={styles.inputText}
-                            placeholder="Data de nascimento"
-                            keyboardType='numeric'
+                            placeholder="Descrição"
+                            keyboardType='default'
+                            multiline={true}
                         />
                     </View>
 
@@ -101,8 +104,7 @@ export default function CadastroPadrinho() {
             </ScrollView>
         </KeyboardAvoidingView>
     );
-};
-
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -117,15 +119,15 @@ const styles = StyleSheet.create({
         paddingBottom: 50
     },
     imageLogo: {
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         resizeMode: 'contain'
     },
     formContainer: {
-        width: '100%',
+        width: 350,
         backgroundColor: '#ffffff',
         alignItems: 'center',
-        borderRadius: 25,
+        borderRadius: 30,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     inputView: {
-        width: '80%',
+        width: '85%',
         backgroundColor: '#E7E7E7',
         borderRadius: 25,
         height: 50,
@@ -158,13 +160,12 @@ const styles = StyleSheet.create({
     },
     inputText: {
         flex: 1,
-        height: 40,
+        height: 80,
         paddingHorizontal: 10,
         color: '#000000'
-
     },
     btnRegister: {
-        width: '80%',
+        width: '85%',
         backgroundColor: '#C693C6',
         borderRadius: 25,
         height: 50,

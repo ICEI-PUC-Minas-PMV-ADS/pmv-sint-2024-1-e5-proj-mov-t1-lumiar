@@ -50,7 +50,7 @@ export default function Login() {
                     <Text style={styles.loginTextBtn}>Acessar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('CadastroPadrinho')}>
+                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('SponsorRegistration')}>
                     <Text style={styles.registerTextBtn}>Criar conta</Text>
                 </TouchableOpacity>
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     inputView: {
         width: '80%',
         backgroundColor: '#E7E7E7',
-        borderRadius: 25,
+        borderRadius: 30,
         height: 50,
         marginBottom: 20,
         justifyContent: 'center',
