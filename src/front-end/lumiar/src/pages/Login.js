@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function Login() {
     const navigation = useNavigation();
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
 
@@ -30,7 +32,13 @@ export default function Login() {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Senha"
-                        secureTextEntry={true}
+                        secureTextEntry={!passwordVisible}
+                    />
+                    <FontAwesome
+                        name={passwordVisible ? 'eye-slash' : 'eye'}
+                        size={20}
+                        style={styles.passwordIcon}
+                        onPress={() => setPasswordVisible(!passwordVisible)}
                     />
                 </View>
 
@@ -79,10 +87,15 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 20,
         justifyContent: 'center',
-        padding: 20
+        padding: 20,
+        alignSelf: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     inputText: {
+        flex: 1,
         height: 50,
+        paddingHorizontal: 10,
         color: '#000000'
     },
     btnLogin: {
@@ -129,6 +142,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+    },
+    passwordIcon: {
+        paddingBottom: 20,
+        color: '#383839'
     }
-
 });

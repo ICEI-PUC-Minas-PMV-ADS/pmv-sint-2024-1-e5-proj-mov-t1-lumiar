@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function CadastroPadrinho() {
     const navigation = useNavigation();
     const [cpf, setCpf] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -53,11 +56,18 @@ export default function CadastroPadrinho() {
                     </View>
 
                     <View style={styles.inputView}>
+
                         <TextInput
                             style={styles.inputText}
                             placeholder="Senha"
                             keyboardType='default'
-                            secureTextEntry={true}
+                            secureTextEntry={!passwordVisible}
+                        />
+                        <FontAwesome
+                            name={passwordVisible ? 'eye-slash' : 'eye'}
+                            size={20}
+                            style={styles.passwordIcon}
+                            onPress={() => setPasswordVisible(!passwordVisible)}
                         />
                     </View>
 
@@ -66,7 +76,13 @@ export default function CadastroPadrinho() {
                             style={styles.inputText}
                             placeholder="Confirme sua senha"
                             keyboardType='default'
-                            secureTextEntry={true}
+                            secureTextEntry={!confirmPasswordVisible}
+                        />
+                        <FontAwesome
+                            name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
+                            size={20}
+                            style={styles.passwordIcon}
+                            onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
                         />
                     </View>
 
@@ -98,7 +114,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 50 
+        paddingBottom: 50
     },
     imageLogo: {
         width: 300,
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     formContainer: {
-        width: '100%', 
+        width: '100%',
         backgroundColor: '#ffffff',
         alignItems: 'center',
         borderRadius: 25,
@@ -119,7 +135,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         marginBottom: 60,
-        paddingBottom: 20 
+        paddingBottom: 20
     },
     signUpTxt: {
         fontWeight: 'regular',
@@ -136,11 +152,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center',
         padding: 20,
-        alignSelf: 'center' 
+        alignSelf: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     inputText: {
-        height: 50,
+        flex: 1,
+        height: 40,
+        paddingHorizontal: 10,
         color: '#000000'
+
     },
     btnRegister: {
         width: '80%',
@@ -158,5 +179,9 @@ const styles = StyleSheet.create({
         color: '#007bff',
         fontSize: 14,
         marginBottom: 10
+    },
+    passwordIcon: {
+        paddingBottom: 20,
+        color: '#383839'
     }
 });
