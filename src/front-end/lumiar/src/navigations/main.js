@@ -6,7 +6,6 @@ import SponsorRegistration from '../pages/SponsorRegistration';
 import ProfileInstitution from '../pages/ProfileInstitution';
 import InstitutionRegistration from '../pages/InstitutionRegistration';
 import InstitutionHome from '../pages/InstitutionHome';
-import Header from '../shared/Header';
 
 const Stack = createNativeStackNavigator();
 
