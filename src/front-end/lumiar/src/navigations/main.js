@@ -5,6 +5,8 @@ import Login from '../pages/Login';
 import SponsorRegistration from '../pages/SponsorRegistration';
 import ProfileInstitution from '../pages/ProfileInstitution';
 import InstitutionRegistration from '../pages/InstitutionRegistration';
+import InstitutionHome from '../pages/InstitutionHome';
+import Header from '../shared/Header';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +43,19 @@ const Main = () => {
                     header: () => null,
                 }}
             />
+
+            <Stack.Screen
+                name="InstitutionHome"
+                component={InstitutionHome}
+                options={{
+                    title: 'Crianças cadastradas',
+                    headerBackVisible: false,
+                    headerTitleAlign: 'left',
+                    hideWhenScrolling: true
+
+                }}
+            />
+
         </Stack.Navigator>
     );
 };

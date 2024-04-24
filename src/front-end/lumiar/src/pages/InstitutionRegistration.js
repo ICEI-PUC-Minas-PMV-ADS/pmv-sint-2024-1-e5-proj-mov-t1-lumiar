@@ -90,7 +90,8 @@ export default function InstitutionRegistration() {
                     </View>
 
                     <TouchableOpacity style={styles.btnRegister}>
-                        <Text style={styles.registerTextBtn}>Cadastrar</Text>
+                        <Text style={styles.registerTextBtn}
+                        onPress={() => navigation.navigate('InstitutionHome')}>Cadastrar</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
