@@ -9,6 +9,7 @@ import InstitutionHome from '../pages/InstitutionHome';
 import ProfileInstitution from '../pages/institution/ProfileInstitution.js';
 import EscolhaDeUser from '../pages/apagarDepois/EscolhaDeUser';
 import PaymentSponsor from '../pages/sponsor/PaymentSponsor.js';
+import InstitutionList from '../pages/institution/InstitutionList';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,14 @@ const Main = () => {
             <Stack.Screen
                 name="EscolhaDeUser"
                 component={EscolhaDeUser}
+                options={{
+                    header: () => null,
+                }}
+            />
+
+            <Stack.Screen
+                name="InstitutionList"
+                component={InstitutionList}
                 options={{
                     header: () => null,
                 }}
