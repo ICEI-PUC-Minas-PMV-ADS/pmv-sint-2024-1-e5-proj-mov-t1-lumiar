@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../pages/Login';
 import SponsorRegistration from '../pages/SponsorRegistration';
-import ProfileInstitution from '../pages/ProfileInstitution';
+import ProfileSponsor from '../pages/ProfileSponsor';
 import InstitutionRegistration from '../pages/InstitutionRegistration';
 import InstitutionHome from '../pages/InstitutionHome';
 
@@ -28,8 +28,8 @@ const Main = () => {
             />
 
             <Stack.Screen
-                name="ProfileInstitution"
-                component={ProfileInstitution}
+                name="ProfileSponsor"
+                component={ProfileSponsor}
                 options={{
                     header: () => null,
                 }}
