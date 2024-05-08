@@ -10,7 +10,7 @@ export default function ProfileSponsor() {
     return (
         <View style={styles.container}>
 
-            <Image source={require('../../assets/user.png')} style={styles.profileImage} />
+            <Image source={require('../../../assets/user.png')} style={styles.profileImage} />
 
             <Text style={styles.greetingText}>Olá, [nome]</Text>
 
