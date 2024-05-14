@@ -2,10 +2,10 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../pages/Login';
-import SponsorRegistration from '../pages/SponsorRegistration';
+import SponsorRegistration from '../pages/sponsor/SponsorRegistration.js';
 import ProfileSponsor from '../pages/sponsor/ProfileSponsor';
-import InstitutionRegistration from '../pages/InstitutionRegistration';
-import InstitutionHome from '../pages/InstitutionHome';
+import InstitutionRegistration from '../pages/institution/InstitutionRegistration.js';
+import InstitutionHome from '../pages/institution/InstitutionHome.js';
 import ProfileInstitution from '../pages/institution/ProfileInstitution.js';
 import EscolhaDeUser from '../pages/apagarDepois/EscolhaDeUser';
 import PaymentSponsor from '../pages/sponsor/PaymentSponsor.js';

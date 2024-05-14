@@ -14,7 +14,7 @@ export default function SponsorRegistration() {
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <Image
-                    source={require('../../assets/Lumiar_branco.png')}
+                    source={require('../../../assets/Lumiar_branco.png')}
                     style={styles.imageLogo}
                 />
                 <View style={styles.formContainer}>

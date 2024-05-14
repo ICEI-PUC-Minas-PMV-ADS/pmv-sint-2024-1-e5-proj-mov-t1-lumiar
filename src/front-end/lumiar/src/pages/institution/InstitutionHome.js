@@ -11,7 +11,7 @@ export default function InstitutionHome() {
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <View>
                     <Card style={styles.card} mode="elevated">
-                        <Card.Cover source={require('../../assets/criança1.jpg')} />
+                        <Card.Cover source={require('../../../assets/criança1.jpg')} />
                         <Card.Content>
                             <Text style={styles.name} variant="titleLarge">Nome</Text>
                             <Text variant="bodyMedium">Texto</Text>
@@ -24,7 +24,7 @@ export default function InstitutionHome() {
                     </Card>
 
                     <Card style={styles.card} mode="elevated">
-                        <Card.Cover source={require('../../assets/criança2.jpg')} />
+                        <Card.Cover source={require('../../../assets/criança2.jpg')} />
                         <Card.Content>
                             <Text style={styles.name} variant="titleLarge">Nome</Text>
                             <Text variant="bodyMedium">Texto</Text>
@@ -37,7 +37,7 @@ export default function InstitutionHome() {
                     </Card>
 
                     <Card style={styles.card} mode="elevated">
-                        <Card.Cover source={require('../../assets/criança3.jpg')} />
+                        <Card.Cover source={require('../../../assets/criança3.jpg')} />
                         <Card.Content>
                             <Text style={styles.name} variant="titleLarge">Nome</Text>
                             <Text variant="bodyMedium">Texto</Text>

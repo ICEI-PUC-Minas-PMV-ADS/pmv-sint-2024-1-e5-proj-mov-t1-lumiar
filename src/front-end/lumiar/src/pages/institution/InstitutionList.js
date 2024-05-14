@@ -1,38 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const data = [
-  {
-    id: '1',
-    name: 'BH Futuro',
-    image: require('../../../assets/instituicao1.jpg'),
-    description: 'O Instituto BH Futuro é um hub de inovação social com projetos culturais, esportivos e educacionais.',
-    address: 'Endereço: Rua Des. Mario Matos, 578 - Serra, Belo Horizonte - MG',
-  },
-  {
-    id: '2',
-    name: 'A Associação Peter Pan',
-    image: require('../../../assets/instituicao2.jpg'),
-    description: 'A Associação Peter Pan (APP) nasceu da vontade de amar e de tornar melhor a vida de crianças e adolescentes com câncer. Criada em 1996, a instituição vem transformando o cenário do câncer infantojuvenil no estado do Ceará em 28 anos de história.',
-    address: 'Endereço: Rua Alberto Montezuma, 350, Vila União, Fortaleza, Ceará',
-  },
-  {
-    id: '3',
-    name: 'Criança é vida',
-    image: require('../../../assets/instituicao3.jpg'),
-    description: 'O Instituto Criança é Vida é uma organização sem fins lucrativos que desenvolve projetos para atender ao que médicos e psicólogos consideram o básico para a prevenção de doenças e para o bom desenvolvimento de bebês, crianças e adolescentes.',
-    address: 'Endereço: Rua Fernandes Moreira, 1.166, 7º andar Chácara Santo Antônio - São Paulo - SP',
-  }
-];
+import api from '../../services/api';
+
+// const data = [
+//   {
+//     id: '1',
+//     name: 'BH Futuro',
+//     image: require('../../../assets/instituicao1.jpg'),
+//     description: 'O Instituto BH Futuro é um hub de inovação social com projetos culturais, esportivos e educacionais.',
+//     address: 'Endereço: Rua Des. Mario Matos, 578 - Serra, Belo Horizonte - MG',
+//   },
+//   {
+//     id: '2',
+//     name: 'A Associação Peter Pan',
+//     image: require('../../../assets/instituicao2.jpg'),
+//     description: 'A Associação Peter Pan (APP) nasceu da vontade de amar e de tornar melhor a vida de crianças e adolescentes com câncer. Criada em 1996, a instituição vem transformando o cenário do câncer infantojuvenil no estado do Ceará em 28 anos de história.',
+//     address: 'Endereço: Rua Alberto Montezuma, 350, Vila União, Fortaleza, Ceará',
+//   },
+//   {
+//     id: '3',
+//     name: 'Criança é vida',
+//     image: require('../../../assets/instituicao3.jpg'),
+//     description: 'O Instituto Criança é Vida é uma organização sem fins lucrativos que desenvolve projetos para atender ao que médicos e psicólogos consideram o básico para a prevenção de doenças e para o bom desenvolvimento de bebês, crianças e adolescentes.',
+//     address: 'Endereço: Rua Fernandes Moreira, 1.166, 7º andar Chácara Santo Antônio - São Paulo - SP',
+//   }
+// ];
 
 export default function InstitutionList() {
   const navigation = useNavigation();
 
+  const [institutions, setInstitutions] = useState([]);
+
+  useEffect(() => {
+    api.get('institution').then(({ data }) => {
+      setInstitutions(data)
+      console.log(data)
+    });
+  }, [])
+
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <Image source={item.image} style={styles.image} />
+      {/* <Image source={item.image} style={styles.image} /> */}
       <Text style={styles.name}>{item.name}</Text>
       <Text>{item.description}</Text>
       <Text>{item.address}</Text>
@@ -52,9 +63,9 @@ export default function InstitutionList() {
       </View>
 
       <FlatList
-        data={data}
+        data={institutions}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
         contentContainerStyle={styles.list}
       />
     </View>
