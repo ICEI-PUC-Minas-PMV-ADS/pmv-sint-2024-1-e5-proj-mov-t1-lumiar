@@ -8,7 +8,6 @@ const DonationRoutes = require('./src/routes/donation')
 const ChildRoutes = require('./src/routes/child')
 
 const app = express()
-
 app.use(express.json())
 app.use(cors())
 
