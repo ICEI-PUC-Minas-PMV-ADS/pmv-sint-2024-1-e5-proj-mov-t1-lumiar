@@ -4,9 +4,27 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvo
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
+import api from '../services/api';
+
 export default function Login() {
     const navigation = useNavigation();
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+
+    const login = () => {
+        api.post("auth/sponsor/login", {
+            email: userName,
+            password: password,
+        })
+            .then(response => {
+                if (response.data.token) {
+                    navigation.navigate('InstitutionList');
+                } else {
+                    console.error('Login failed: ', response.data.message);
+                }
+            });
+    };
 
     return (
 
@@ -25,6 +43,8 @@ export default function Login() {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Usuário"
+                        value={userName}
+                        onChangeText={text => setUserName(text)}
                     />
                 </View>
 
@@ -33,6 +53,8 @@ export default function Login() {
                         style={styles.inputText}
                         placeholder="Senha"
                         secureTextEntry={!passwordVisible}
+                        value={password}
+                        onChangeText={text => setPassword(text)}
                     />
                     <FontAwesome
                         name={passwordVisible ? 'eye-slash' : 'eye'}
@@ -46,12 +68,16 @@ export default function Login() {
                     <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('EscolhaDeUser')}>
+                <TouchableOpacity style={styles.btnLogin} onPress={() => login()} >
                     <Text style={styles.loginTextBtn}>Acessar</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('SponsorRegistration')}>
                     <Text style={styles.registerTextBtn}>Criar conta</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('EscolhaDeUser')}>
+                    <Text style={styles.registerTextBtn}>Todas as paginas</Text>
                 </TouchableOpacity>
 
             </View>

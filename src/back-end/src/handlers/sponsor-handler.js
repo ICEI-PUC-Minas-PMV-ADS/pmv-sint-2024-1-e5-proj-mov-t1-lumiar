@@ -27,7 +27,7 @@ class Sponsor {
             return res.status(422).json({ msg: `${email} e ${password} são obrigatórios` })
         }
 
-        const sponsor = await Sponsor.findOne({ email: email })
+        const sponsor = await SponsorModel.findOne({ email })
         if (!sponsor) {
             return res.status(404).json({ msg: 'Usuário não encontrado!' })
         }

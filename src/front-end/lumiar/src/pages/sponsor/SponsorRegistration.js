@@ -4,11 +4,34 @@ import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
+import api from '../../services/api';
+
 export default function SponsorRegistration() {
     const navigation = useNavigation();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [age, setAge] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [cpf, setCpf] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    const newSponsor = () => {
+        api.post("sponsor", {
+            name: name,
+            email: email,
+            age: 25,
+            cpf: cpf,
+            password: password,
+            donations: {}
+        })
+            .then((response) => {
+                if (response.data) {
+                    navigation.navigate('Login')
+                }
+            });
+    };
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -24,6 +47,8 @@ export default function SponsorRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Nome"
+                            value={name}
+                            onChangeText={text => setName(text)}
                             keyboardType='default'
                         />
                     </View>
@@ -32,6 +57,8 @@ export default function SponsorRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="E-mail"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
                             keyboardType='email-address'
                         />
                     </View>
@@ -50,7 +77,9 @@ export default function SponsorRegistration() {
                     <View style={styles.inputView}>
                         <TextInput
                             style={styles.inputText}
-                            placeholder="Data de nascimento"
+                            placeholder="Idade"
+                            value={age}
+                            onChangeText={text => setAge(text)}
                             keyboardType='numeric'
                         />
                     </View>
@@ -60,6 +89,8 @@ export default function SponsorRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Senha"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
                             keyboardType='default'
                             secureTextEntry={!passwordVisible}
                         />
@@ -75,6 +106,8 @@ export default function SponsorRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Confirme sua senha"
+                            value={confirmPassword}
+                            onChangeText={text => setConfirmPassword(text)}
                             keyboardType='default'
                             secureTextEntry={!confirmPasswordVisible}
                         />
@@ -86,7 +119,7 @@ export default function SponsorRegistration() {
                         />
                     </View>
 
-                    <TouchableOpacity style={styles.btnRegister}>
+                    <TouchableOpacity style={styles.btnRegister} onPress={() => newSponsor()} >
                         <Text style={styles.registerTextBtn}>Cadastrar</Text>
                     </TouchableOpacity>
 
@@ -94,7 +127,7 @@ export default function SponsorRegistration() {
                         <Text
                             style={styles.haveAccount}
                             onPress={() => navigation.navigate('Login')}>
-                            Já possui conta? Clique aqui.
+                            Já possui conta? Faça login.
                         </Text>
                     </TouchableOpacity>
                 </View>

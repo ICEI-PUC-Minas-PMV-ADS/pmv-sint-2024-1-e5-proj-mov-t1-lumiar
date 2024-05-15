@@ -98,7 +98,7 @@ export default function InstitutionRegistration() {
                         <Text
                             style={styles.haveAccount}
                             onPress={() => navigation.navigate('Login')}>
-                            Já possui conta? Clique aqui.
+                            Já possui conta? Faça login.
                         </Text>
                     </TouchableOpacity>
                 </View>
