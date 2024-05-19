@@ -11,7 +11,7 @@
 
 As ferramentas utilizadas para a realização dos testes foram:
 
-- O Trello para gerenciamento e rastreamento de bugs;
+- Trello para gerenciamento e rastreamento de bugs;
 - Aplicativo móvel do Expo.
 
 ## Cenários de Testes
@@ -26,3 +26,13 @@ Os cenários de testes apresentados a seguir foram selecionados para garantir qu
 | **Objetivo:** | Verificar se o sistema permite o cadastro de um usuário do tipo padrinho corretamente. |
 | **Passos para Execução:** | 1. Acesse a página de cadastro; <br> 2. Preencha os campos obrigatórios: nome, e-mail, senha, CPF, data de nascimento, senha e confirmação da senha; <br> 3. Clique no botão "Cadastrar".| 
 | **Resultados Esperados:** | - O sistema deve realizar o cadastro do usuário informado. <br> - O usuário será redirecionado para a área de apadrinhamento, que informa a lista de crianças disponiveis para apadrinhar.|
+
+
+### 02. Cadastro do Usuário Instituição
+
+| Campo                   | Informação                                                                                             |
+|-------------------------|--------------------------------------------------------------------------------------------------------|
+| **Requisitos Associados:** | O Sistema deve dispor de uma tela para cadastro do usuário do tipo instituição, onde será informado nome da instituição, e-mail, CNPJ, senha e confirmação da senha.|
+| **Objetivo:** | Verificar se o sistema permite o cadastro de um usuário do tipo instituição corretamente. |
+| **Passos para Execução:** | 1. Acesse a página de cadastro; <br> 2. Preencha os campos obrigatórios: nome da instituição, e-mail, CNPJ, senha e confirmação da senha; <br> 3. Clique no botão "Cadastrar".| 
+| **Resultados Esperados:** | - O sistema deve realizar o cadastro da instituição informada. <br> - O usuário será redirecionado para o mural de listagem de crianças.|
