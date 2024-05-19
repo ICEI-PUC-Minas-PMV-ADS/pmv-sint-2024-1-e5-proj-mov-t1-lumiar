@@ -7,9 +7,7 @@
 3. **Login do Usuário Padrinho**: Autenticação de usuário e acesso à sua área área.
 4. **Login do Usuário Instituição**: Autenticação de usuário e acesso à sua área área.
 
-## Ferramentas Utilizadas
-
-As ferramentas utilizadas para a realização dos testes foram:
+## Ferramentas Utilizadas para a realização dos testes:
 
 - Trello para gerenciamento e rastreamento de bugs;
 - Aplicativo móvel do Expo.
