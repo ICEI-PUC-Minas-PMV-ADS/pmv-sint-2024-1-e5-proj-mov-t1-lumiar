@@ -1,9 +1,28 @@
 # Planos de Testes de Software
 
-Apresente os cenários de testes utilizados na realização dos testes da sua aplicação. Escolha cenários de testes que demonstrem os requisitos sendo satisfeitos.
+## Funcionalidades Avaliadas
 
-Enumere quais cenários de testes foram selecionados para teste. Neste tópico o grupo deve detalhar quais funcionalidades avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
- 
-# Evidências de Testes de Software
+1. **Cadastro do Usuário Padrinho**: Verificação de campos obrigatórios e redirecionamento após o cadastro.
+2. **Cadastro do Usuário Instituição**: Verificação de campos obrigatórios e redirecionamento após o cadastro.
+3. **Login do Usuário Padrinho**: Autenticação de usuário e acesso à sua área área.
+4. **Login do Usuário Instituição**: Autenticação de usuário e acesso à sua área área.
 
-Apresente imagens e/ou vídeos que comprovam que um determinado teste foi executado, e o resultado esperado foi obtido. Normalmente são screenshots de telas, ou vídeos do software em funcionamento.
+## Ferramentas Utilizadas
+
+As ferramentas utilizadas para a realização dos testes foram:
+
+- O Trello para gerenciamento e rastreamento de bugs;
+- Aplicativo móvel do Expo.
+
+## Cenários de Testes
+
+Os cenários de testes apresentados a seguir foram selecionados para garantir que os requisitos da aplicação sejam satisfeitos. Cada cenário descreve uma funcionalidade específica da aplicação e como será validada por meio de testes.
+
+### 01. Cadastro do Usuário Padrinho
+
+| Campo                   | Informação                                                                                             |
+|-------------------------|--------------------------------------------------------------------------------------------------------|
+| **Requisitos Associados:** | O Sistema deve dispor de uma tela para cadastro do usuário do tipo padrinho, onde será informado nome, e-mail, CPF, data de nascimento, senha e confirmação da senha.|
+| **Objetivo:** | Verificar se o sistema permite o cadastro de um usuário do tipo padrinho corretamente. |
+| **Passos para Execução:** | 1. Acesse a página de cadastro; <br> 2. Preencha os campos obrigatórios: nome, e-mail, senha, CPF, data de nascimento, senha e confirmação da senha; <br> 3. Clique no botão "Cadastrar".| 
+| **Resultados Esperados:** | - O sistema deve realizar o cadastro do usuário informado. <br> - O usuário será redirecionado para a área de apadrinhamento, que informa a lista de crianças disponiveis para apadrinhar.|
