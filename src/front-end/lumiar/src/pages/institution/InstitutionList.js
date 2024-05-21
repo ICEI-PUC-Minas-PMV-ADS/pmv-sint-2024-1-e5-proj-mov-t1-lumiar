@@ -13,7 +13,6 @@ export default function InstitutionList() {
   useEffect(() => {
     api.get('institution').then(({ data }) => {
       setInstitutions(data)
-      console.log(data)
     });
   }, [])
 

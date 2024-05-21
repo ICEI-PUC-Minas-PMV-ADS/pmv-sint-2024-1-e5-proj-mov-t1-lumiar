@@ -84,11 +84,7 @@ const Main = () => {
                 name="InstitutionHome"
                 component={InstitutionHome}
                 options={{
-                    title: 'Crianças cadastradas',
-                    headerBackVisible: false,
-                    headerTitleAlign: 'left',
-                    hideWhenScrolling: true
-
+                   header: () => null
                 }}
             />
 

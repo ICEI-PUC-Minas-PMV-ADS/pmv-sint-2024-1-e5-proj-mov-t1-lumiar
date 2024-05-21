@@ -30,6 +30,9 @@ export default function EscolhaDeUser() {
                     <Text style={styles.registerTextBtn}>Lista de instituicões</Text>
                 </TouchableOpacity>
 
+                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('InstitutionHome')}>
+                    <Text style={styles.registerTextBtn}>Lista de crianças</Text>
+                </TouchableOpacity>
             </View>
 
         </KeyboardAvoidingView>
