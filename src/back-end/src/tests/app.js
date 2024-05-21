@@ -1,4 +1,4 @@
-require('express-async-errors')
+require('dotenv').config({ path: '.env.test' })
 const express = require('express')
 
 const SponsorRoutes = require('../routes/sponsor')
