@@ -9,4 +9,5 @@ module.exports = new Schema({
     donations: { type: Map, default: {} },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
+    image: { type: String, default: null }
 })

@@ -9,4 +9,5 @@ module.exports = new Schema({
     address: { type: Object, default: null },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: null },
+    image: { type: String, default: null }
 })
