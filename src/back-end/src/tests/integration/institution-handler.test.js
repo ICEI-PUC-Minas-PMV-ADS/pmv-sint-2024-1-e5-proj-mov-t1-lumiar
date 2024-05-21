@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '.env.test' })
 
 const Institution = require('../../models/institution')
-
+const jwt = require('jsonwebtoken')
 const { institutionMock } = require('../mocks/institution-mock')
 
 const request = require('supertest')

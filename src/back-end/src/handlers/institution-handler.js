@@ -28,7 +28,7 @@ class Institution {
             return res.status(422).json({ msg: `${email} e ${password} são obrigatórios` })
         }
 
-        const institution = await Institution.findOne({ email: email })
+        const institution = await InstitutionModel.findOne({ email })
         if (!institution) {
             return res.status(404).json({ msg: 'Usuário não encontrado!' })
         }

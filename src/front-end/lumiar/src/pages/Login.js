@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { Switch } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -9,21 +10,42 @@ import api from '../services/api';
 export default function Login() {
     const navigation = useNavigation();
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [userName, setUserName] = useState('')
-    const [password, setPassword] = useState('')
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+
 
     const login = () => {
-        api.post("auth/sponsor/login", {
-            email: userName,
-            password: password,
-        })
-            .then(response => {
-                if (response.data.token) {
-                    navigation.navigate('InstitutionList');
-                } else {
-                    console.error('Login failed: ', response.data.message);
-                }
-            });
+        if (!isSwitchOn) {
+            api.post("auth/sponsor/login", {
+                email: userName,
+                password: password,
+            })
+                .then(response => {
+                    if (response.data.token) {
+                        navigation.navigate('InstitutionList');
+                    } else {
+                        console.error('Login failed: ', response.data.message);
+                    }
+                });
+        }
+        if (isSwitchOn) {
+            api.post("auth/institution/login", {
+                email: userName,
+                password: password,
+            })
+                .then(response => {
+                    if (response.data.token) {
+                        navigation.navigate('InstitutionHome');
+                    } else {
+                        console.error('Login failed: ', response.data.message);
+                    }
+                });
+        }
+
     };
 
     return (
@@ -63,6 +85,13 @@ export default function Login() {
                         onPress={() => setPasswordVisible(!passwordVisible)}
                     />
                 </View>
+
+                <View style={styles.setUser}>
+                    <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color='#C693C6' />
+                    <Text style={styles.setUserText}>Sou instituição</Text>
+                </View>
+
+
 
                 <TouchableOpacity>
                     <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
@@ -123,6 +152,18 @@ const styles = StyleSheet.create({
         height: 50,
         paddingHorizontal: 10,
         color: '#000000'
+    },
+    setUser: {
+        width: '80%',
+        marginLeft: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    setUserText: {
+        color: '#383839',
+        marginLeft: 5,
+        fontSize: 12
     },
     btnLogin: {
         width: '80%',

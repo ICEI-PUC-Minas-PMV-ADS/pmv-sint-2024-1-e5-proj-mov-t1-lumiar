@@ -4,11 +4,43 @@ import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
+import api from '../../services/api';
+
 export default function InstitutionRegistration() {
     const navigation = useNavigation();
     const [cnpj, setCnpj] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [description, setDescription] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    const newInstitution = () => {
+        api.post("institution", {
+            name: name,
+            password: password,
+            email: email,
+            cnpj: cnpj,
+            child: {},
+            creationDate: Date.now(),
+            affiliation: false,
+            address: {
+                street: '',
+                district: '',
+                state: '',
+                country: '',
+                cep: '',
+            },
+            description: description,
+        })
+            .then((response) => {
+                if (response.data) {
+                    setVisible = true;
+                    navigation.navigate('Login')
+                }
+            });
+    };
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -24,6 +56,8 @@ export default function InstitutionRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Nome da instituição"
+                            value={name}
+                            onChangeText={text => setName(text)}
                             keyboardType='default'
                         />
                     </View>
@@ -32,6 +66,8 @@ export default function InstitutionRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="E-mail"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
                             keyboardType='email-address'
                         />
                     </View>
@@ -53,6 +89,8 @@ export default function InstitutionRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Descrição"
+                            value={description}
+                            onChangeText={text => setDescription(text)}
                             keyboardType='default'
                             multiline={true}
                         />
@@ -63,6 +101,8 @@ export default function InstitutionRegistration() {
                         <TextInput
                             style={styles.inputText}
                             placeholder="Senha"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
                             keyboardType='default'
                             secureTextEntry={!passwordVisible}
                         />
@@ -89,9 +129,9 @@ export default function InstitutionRegistration() {
                         />
                     </View>
 
-                    <TouchableOpacity style={styles.btnRegister}>
+                    <TouchableOpacity style={styles.btnRegister} onPress={() => newInstitution()}>
                         <Text style={styles.registerTextBtn}
-                        onPress={() => navigation.navigate('InstitutionHome')}>Cadastrar</Text>
+                        >Cadastrar</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
