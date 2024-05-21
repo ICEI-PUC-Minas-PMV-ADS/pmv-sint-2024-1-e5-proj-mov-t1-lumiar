@@ -10,6 +10,7 @@ import ProfileInstitution from '../pages/institution/ProfileInstitution.js';
 import EscolhaDeUser from '../pages/apagarDepois/EscolhaDeUser';
 import PaymentSponsor from '../pages/sponsor/PaymentSponsor.js';
 import InstitutionList from '../pages/institution/InstitutionList';
+import SetUser from '../pages/SetUser.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -88,6 +89,14 @@ const Main = () => {
                     headerTitleAlign: 'left',
                     hideWhenScrolling: true
 
+                }}
+            />
+
+            <Stack.Screen
+                name="SetUser"
+                component={SetUser}
+                options={{
+                    header: () => null,
                 }}
             />
 

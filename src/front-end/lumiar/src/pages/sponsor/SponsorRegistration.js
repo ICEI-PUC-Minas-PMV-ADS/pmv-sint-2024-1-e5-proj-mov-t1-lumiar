@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,
 import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Snackbar } from 'react-native-paper';
 
 import api from '../../services/api';
 
@@ -16,6 +17,9 @@ export default function SponsorRegistration() {
     const [cpf, setCpf] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    const onDismissSnackBar = () => setVisible(false);
 
     const newSponsor = () => {
         api.post("sponsor", {
@@ -28,6 +32,7 @@ export default function SponsorRegistration() {
         })
             .then((response) => {
                 if (response.data) {
+                   setVisible = true;
                     navigation.navigate('Login')
                 }
             });
@@ -131,6 +136,12 @@ export default function SponsorRegistration() {
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+                <Snackbar
+                    visible={visible}
+                    onDismiss={onDismissSnackBar}>
+                    Conta criada com sucesso!
+                </Snackbar>
             </ScrollView>
         </KeyboardAvoidingView>
     );
