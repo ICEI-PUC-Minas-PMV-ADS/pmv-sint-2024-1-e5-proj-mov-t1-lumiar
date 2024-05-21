@@ -12,4 +12,8 @@ Sponsor.findByName = async (name) => {
     return Sponsor.findOne({ name }, '-password').lean()
 }
 
+Sponsor.updateImage = async (idChild, imageUrl) => {
+    return Sponsor.findOneAndUpdate({ _id: idChild }, { image: imageUrl }, { new: true }).lean()
+}
+
 module.exports = Sponsor

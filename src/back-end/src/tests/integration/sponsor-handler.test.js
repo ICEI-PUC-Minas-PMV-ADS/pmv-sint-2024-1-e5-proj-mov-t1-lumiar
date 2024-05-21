@@ -44,6 +44,19 @@ describe('Sponsor handler test', () => {
             expect(body.name).toBe(sponsorUpdated.name)
         })
 
+        it('Should be able to update spon sor image', async () => {
+            const sponsor = await Sponsor.create(sponsorMock)
+            const imageUrl = 'www.google.com.br'
+
+            const { body, statusCode } = await request(app)
+                .put(`/sponsor/image/${sponsor._id}`)
+                .set('x-api-key', process.env.X_API_KEY)
+                .send({ imageUrl })
+
+            expect(statusCode).toBe(200)
+            expect(body.image).toBe(imageUrl)
+        })
+
         it('Should be able to get all sponsor registered', async () => {
             await Sponsor.create(sponsorMock)
             await Sponsor.create({ ...sponsorMock, cpf: '091.952.320-01' })

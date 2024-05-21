@@ -5,7 +5,6 @@ const Child = require('../../models/child')
 const Sponsor = require('../../models/sponsor')
 const Institution = require('../../models/institution')
 
-const { sponsorMock } = require('../mocks/sponsor-mock')
 const { childMock } = require('../mocks/child-mock')
 const { institutionMock } = require('../mocks/institution-mock')
 
@@ -48,6 +47,19 @@ describe('Child handler test', () => {
 
             const updatedChild = await Child.findOne({ _id: child._id }).lean()
             expect(body.name).toBe(updatedChild.name)
+        })
+
+        it('Should be able to update child image', async () => {
+            const child = await Child.create(childMock)
+            const imageUrl = 'www.google.com.br'
+
+            const { body, statusCode } = await request(app)
+                .put(`/child/image/${child._id}`)
+                .set('x-api-key', process.env.X_API_KEY)
+                .send({ imageUrl })
+
+            expect(statusCode).toBe(200)
+            expect(body.image).toBe(imageUrl)
         })
 
         it('Should be able to get all child registered by Institution', async () => {

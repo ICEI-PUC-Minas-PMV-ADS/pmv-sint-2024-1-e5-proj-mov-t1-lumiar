@@ -31,8 +31,8 @@ class Sponsor {
         if (!sponsor) {
             return res.status(404).json({ msg: 'Usuário não encontrado!' })
         }
-        const checkPassword = await bcrypt.compare(password, sponsor.password)
 
+        const checkPassword = await bcrypt.compare(password, sponsor.password)
         if (!checkPassword) {
             return res.status(422).json({ msg: 'Senha inválida' })
         }
@@ -84,6 +84,22 @@ class Sponsor {
             return res.status(200).json(updatedSponsor)
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao atualizar o documento' })
+        }
+    }
+
+    static async updateImage(req, res) {
+        const { id: sponsorId } = req.params
+        const { imageUrl } = req.body
+
+        if (!mongoose.Types.ObjectId.isValid(sponsorId)) {
+            return res.status(404).json({ message: `${sponsorId} não é um id válido` })
+        }
+
+        try {
+            const sponsor = await SponsorModel.updateImage(sponsorId, imageUrl)
+            return res.status(200).json(sponsor)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao atualizar documento' })
         }
     }
 

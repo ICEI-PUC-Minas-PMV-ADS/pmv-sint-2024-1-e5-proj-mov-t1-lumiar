@@ -10,10 +10,15 @@ export default function InstitutionList() {
 
   const [institutions, setInstitutions] = useState([]);
 
+  const getInstitution = async () => {
+    const response = await api.get('institution')
+    console.log({ response })
+    setInstitutions(response.data)
+  }
+
+
   useEffect(() => {
-    api.get('institution').then(({ data }) => {
-      setInstitutions(data)
-    });
+    getInstitution()
   }, [])
 
   const renderItem = ({ item }) => (

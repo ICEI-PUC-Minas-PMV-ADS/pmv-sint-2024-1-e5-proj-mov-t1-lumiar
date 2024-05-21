@@ -10,6 +10,7 @@ routes.post('/institution', Institution.createDocument)
 routes.post('/send-email', Institution.sendEmail)
 routes.post('/auth/institution/login', Institution.authLogin)
 routes.put('/institution/:id', Institution.updateDocument)
+routes.put('/institution/image/:id', Institution.updateImage)
 routes.delete('/institution/:id', Institution.delDocumentById)
 
 module.exports = routes

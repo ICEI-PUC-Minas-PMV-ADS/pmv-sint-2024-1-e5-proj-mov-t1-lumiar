@@ -48,6 +48,19 @@ describe('Institution handler test', () => {
             expect(body.name).toBe(institutionUpdated.name)
         })
 
+        it('Should be able to update institution image', async () => {
+            const institution = await Institution.create(institutionMock)
+            const imageUrl = 'www.google.com.br'
+
+            const { body, statusCode } = await request(app)
+                .put(`/institution/image/${institution._id}`)
+                .set('x-api-key', process.env.X_API_KEY)
+                .send({ imageUrl })
+
+            expect(statusCode).toBe(200)
+            expect(body.image).toBe(imageUrl)
+        })
+
         it('Should be able to get all institution registered', async () => {
             await Institution.create(institutionMock)
             await Institution.create({ ...institutionMock, cnpj: '091.952.320-01' })

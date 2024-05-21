@@ -12,4 +12,8 @@ Child.updateById = async (idChild, bodyToUpdate) => {
     return Child.findOneAndUpdate({ _id: idChild }, bodyToUpdate, { new: true }).lean()
 }
 
+Child.updateImage = async (idChild, imageUrl) => {
+    return Child.findOneAndUpdate({ _id: idChild }, { image: imageUrl }, { new: true }).lean()
+}
+
 module.exports = Child

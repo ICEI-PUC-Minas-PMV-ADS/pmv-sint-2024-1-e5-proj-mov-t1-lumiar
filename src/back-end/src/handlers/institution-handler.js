@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const InstitutionModel = require('../models/institution')
 const { validationDate } = require('../validation')
@@ -28,7 +29,7 @@ class Institution {
             return res.status(422).json({ msg: `${email} e ${password} são obrigatórios` })
         }
 
-        const institution = await InstitutionModel.findOne({ email })
+        const institution = await InstitutionModel.findOne({ email: email })
         if (!institution) {
             return res.status(404).json({ msg: 'Usuário não encontrado!' })
         }
@@ -89,6 +90,22 @@ class Institution {
             return res.status(200).json(updatedInstitution)
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao atualizar o documento' })
+        }
+    }
+
+    static async updateImage(req, res) {
+        const { id: institutinId } = req.params
+        const { imageUrl } = req.body
+
+        if (!mongoose.Types.ObjectId.isValid(institutinId)) {
+            return res.status(404).json({ message: `${institutinId} não é um id válido` })
+        }
+
+        try {
+            const intituiton = await InstitutionModel.updateImage(institutinId, imageUrl)
+            return res.status(200).json(intituiton)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao atualizar documento' })
         }
     }
 

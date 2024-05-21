@@ -12,4 +12,5 @@ module.exports = new Schema({
     affiliation: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: null },
+    image: { type: String, default: null }
 })

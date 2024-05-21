@@ -47,6 +47,22 @@ class Child {
         }
     }
 
+    static async updateImage(req, res) {
+        const { id: childId } = req.params
+        const { imageUrl } = req.body
+
+        if (!mongoose.Types.ObjectId.isValid(childId)) {
+            return res.status(404).json({ message: `${childId} não é um id válido` })
+        }
+
+        try {
+            const children = await ChildModel.updateImage(childId, imageUrl)
+            return res.status(200).json(children)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao atualizar documento' })
+        }
+    }
+
     static async getAllDocumentByInstitution(req, res) {
         const { id: institutionId } = req.params
 

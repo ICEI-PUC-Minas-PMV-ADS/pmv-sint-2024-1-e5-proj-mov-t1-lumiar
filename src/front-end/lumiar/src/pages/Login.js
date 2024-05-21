@@ -12,11 +12,9 @@ export default function Login() {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
 
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-
-
 
     const login = () => {
         if (!isSwitchOn) {
