@@ -9,6 +9,7 @@ routes.get('/sponsor', Sponsor.getAllDocument)
 routes.post('/sponsor', Sponsor.createDocument)
 routes.post('/auth/sponsor/login', Sponsor.authLogin)
 routes.put('/sponsor/:id', Sponsor.updateDocument)
+routes.put('/sponsor/image/:id', Sponsor.updateImage)
 routes.delete('/sponsor/:id', Sponsor.delDocumentById)
 
 module.exports = routes
