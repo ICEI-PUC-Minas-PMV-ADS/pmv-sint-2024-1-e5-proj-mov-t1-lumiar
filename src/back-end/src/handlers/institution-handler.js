@@ -48,7 +48,7 @@ class Institution {
                 secret,
             )
 
-            res.status(200).json({ msg: 'Autenticação realizada com sucesso', token })
+            res.status(200).json({ msg: 'Autenticação realizada com sucesso', token, userId: institution._id })
         } catch (err) {
             res.status(500).json({ msg: 'Houve um erro no servidor, tente novamente' })
         }
