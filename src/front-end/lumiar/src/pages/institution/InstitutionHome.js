@@ -1,24 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { Text, KeyboardAvoidingView, ScrollView, Platform, StyleSheet, View, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Card, Avatar, Button, } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 
 import api from '../../services/api';
 
 
 export default function InstitutionHome() {
-    const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+    // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
     const [children, setChildren] = useState([]);
     const id = '664c063407a6bf702e66a166';
+    const [visible, setVisible] = React.useState(false);
+    const [selectedChildId, setSelectedChildId] = useState(null);
 
-    useEffect(() => {
+    const showDialog = (childId) => {
+        setSelectedChildId(childId);
+        setVisible(true);
+    };
+
+    const hideDialog = () => {
+        setVisible(false);
+        setSelectedChildId(null);
+    };
+
+    const getChildren = async () => {
         api.get(`child/institution/${id}`).then(({ data }) => {
             setChildren(data)
         });
+    }
+
+    const deleteChild = async () => {
+        try {
+            await api.delete(`child/${selectedChildId}`, {
+            });
+            setChildren(children.filter(child => child._id !== selectedChildId));
+        } catch (error) {
+            console.error('Failed to delete child:', error);
+        } finally {
+            hideDialog();
+        }
+    }
+
+    useEffect(() => {
+        getChildren();
     }, []);
 
     const renderItem = ({ item }) => (
+
         <View style={styles.card}>
             {/* <Image source={item.image} style={styles.image} /> */}
             <Text style={styles.name}>{item.name}</Text>
@@ -26,7 +55,7 @@ export default function InstitutionHome() {
             <Text>{item.description}</Text>
             <View style={styles.buttonContainer}>
                 <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">Editar</Button>
-                <Button style={styles.button} buttonColor="#B52C2C" textColor="#FFF">Apagar</Button>
+                <Button style={styles.button} buttonColor="#B52C2C" textColor="#FFF" onPress={() => showDialog(item._id)}>Apagar</Button>
             </View>
 
         </View>
@@ -48,11 +77,15 @@ export default function InstitutionHome() {
                 renderItem={renderItem}
                 keyExtractor={item => item._id}
                 contentContainerStyle={styles.list}
-                button
+            />
+
+            <DeleteDialog
+                visible={visible}
+                onCancel={hideDialog}
+                onConfirm={deleteChild}
             />
 
         </View>
-
     );
 
 }
