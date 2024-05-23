@@ -7,10 +7,10 @@ import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import api from '../../services/api';
 
 
-export default function InstitutionHome() {
+export default function InstitutionHome({ route }) {
     // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
     const [children, setChildren] = useState([]);
-    const id = '664c063407a6bf702e66a166';
+    const userId = route.params.userId;
     const [visible, setVisible] = React.useState(false);
     const [selectedChildId, setSelectedChildId] = useState(null);
 
@@ -25,7 +25,7 @@ export default function InstitutionHome() {
     };
 
     const getChildren = async () => {
-        api.get(`child/institution/${id}`).then(({ data }) => {
+        api.get(`child/institution/${userId}`).then(({ data }) => {
             setChildren(data)
         });
     }

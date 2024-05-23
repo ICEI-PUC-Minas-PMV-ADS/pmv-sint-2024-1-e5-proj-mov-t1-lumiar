@@ -37,7 +37,7 @@ export default function Login() {
             })
                 .then(response => {
                     if (response.data.token) {
-                        navigation.navigate('InstitutionHome');
+                        navigation.navigate('InstitutionHome', {userId: response.data.userId});
                     } else {
                         console.error('Login failed: ', response.data.message);
                     }
