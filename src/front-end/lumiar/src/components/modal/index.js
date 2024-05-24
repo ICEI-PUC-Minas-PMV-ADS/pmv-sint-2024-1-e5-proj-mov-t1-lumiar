@@ -1,11 +1,7 @@
 import { View, Text, Modal, Pressable, Image, TouchableOpacity } from 'react-native'
 
-export function KidModal({ onClose, isVisible, item = {
-  image: "https://blog-leiturinha-novo.s3.us-east-1.amazonaws.com/production/uploads/2022/07/iStock-1302266351-2-1.jpg",
-  age: '10',
-  name: 'Lucas',
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis odio nulla, id varius nisl scelerisque ac. Suspendisse nec tortor ac enim mattis sollicitudin. Vivamus eu venenatis leo. Vivamus porttitor euismod justo ultrices sagittis. Nulla porttitor porta sem, nec efficitur orci interdum in. Aliquam maximus, mi non convallis mollis, justo velit rutrum nisi, sed bibendum nisi augue at turpis. Phasellus vitae dapibus erat. Quisque laoreet justo a arcu vulputate, eu gravida neque posuere. Suspendisse imperdiet ligula a elementum vestibulum. Nulla dignissim dictum sapien, sit amet porttitor nisi convallis id. Sed ac ornare libero. Fusce eu ultrices orci. In hac habitasse platea dictumst. Suspendisse ut congue magna, non vulputate nibh. Morbi non sapien nisl. Fusce placerat faucibus neque, vitae congue felis condimentum ac."
-} }) {
+export function KidModal({ onClose, isVisible, item }) {
+  const { age = 0, name = '', description = '' } = item || {};
 
   return (
     <Modal
@@ -23,12 +19,12 @@ export function KidModal({ onClose, isVisible, item = {
             {item.name}
           </Text>
           <Text style={styles.kidAge}>{`${item.age} anos`}</Text>
-          <View style={styles.kidImageContainer}>
+          {/* <View style={styles.kidImageContainer}>
             <Image
               source={item.image}
               style={styles.kidImage}
             />
-          </View>
+          </View> */}
           <Text style={styles.kidSubtitle}>Um pouco da minha história</Text>
           <Text style={styles.kidText}>{item.description}</Text>
           <Pressable style={styles.button}>

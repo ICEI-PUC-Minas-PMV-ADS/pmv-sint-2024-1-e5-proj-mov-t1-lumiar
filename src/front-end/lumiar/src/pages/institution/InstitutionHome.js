@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native
 import { Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
+import { KidModal } from "../../components/modal";
 
 import api from '../../services/api';
 
@@ -14,6 +15,7 @@ export default function InstitutionHome({ route }) {
     const canEdit = route.params.canEdit;
     const [visible, setVisible] = React.useState(false);
     const [selectedChildId, setSelectedChildId] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const showDialog = (childId) => {
         setSelectedChildId(childId);
@@ -23,6 +25,15 @@ export default function InstitutionHome({ route }) {
     const hideDialog = () => {
         setVisible(false);
         setSelectedChildId(null);
+    };
+
+    const showModal = (childId) => {
+        setSelectedChildId(childId);
+        setModalVisible(true);
+    };
+
+    const hideModal = () => {
+        setModalVisible(false);
     };
 
     const getChildrenList = async () => {
@@ -44,37 +55,42 @@ export default function InstitutionHome({ route }) {
     }
 
     useEffect(() => {
-        console.log()
         getChildrenList();
     }, []);
 
     const renderItem = ({ item }) => (
 
-        <View style={styles.card}>
-            {/* <Image source={item.image} style={styles.image} /> */}
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.age}>{item.age} anos</Text>
-            <Text>{item.description}</Text>
+        <TouchableOpacity onPress={() => showModal(item._id)} >
+            <View style={styles.card}>
+                {/* <Image source={item.image} style={styles.image} /> */}
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.age}>{item.age} anos</Text>
+                <Text>{item.description}</Text>
 
-            {canEdit && (
+                {canEdit && (
 
-                <View style={styles.buttonContainer}>
-                    <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">
-                        Editar
-                    </Button>
+                    <View style={styles.buttonContainer}>
+                        <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">
+                            Editar
+                        </Button>
 
-                    <Button
-                        style={styles.button}
-                        buttonColor="#B52C2C"
-                        textColor="#FFF"
-                        onPress={() => showDialog(item._id)}
-                    >
-                        Apagar
-                    </Button>
-                </View>
-            )}
-        </View>
+                        <Button
+                            style={styles.button}
+                            buttonColor="#B52C2C"
+                            textColor="#FFF"
+                            onPress={() => showDialog(item._id)}
+                        >
+                            Apagar
+                        </Button>
+                    </View>
+                )}
+            </View>
+        </TouchableOpacity>
+
     );
+
+    const selectedItem = children.find(child => child._id === selectedChildId) || {};
+
 
     return (
         <View style={styles.container}>
@@ -98,6 +114,13 @@ export default function InstitutionHome({ route }) {
                 visible={visible}
                 onCancel={hideDialog}
                 onConfirm={deleteChild}
+            />
+
+
+            <KidModal
+                onClose={hideModal}
+                isVisible={modalVisible}
+                item={selectedItem}
             />
 
         </View>
