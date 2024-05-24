@@ -9,7 +9,7 @@ import InstitutionHome from '../pages/institution/InstitutionHome.js';
 import ProfileInstitution from '../pages/institution/ProfileInstitution.js';
 import EscolhaDeUser from '../pages/apagarDepois/EscolhaDeUser';
 import PaymentSponsor from '../pages/sponsor/PaymentSponsor.js';
-import InstitutionList from '../pages/institution/InstitutionList';
+import SponsorHome from '../pages/sponsor/SponsorHome.js';
 import SetUser from '../pages/SetUser.js';
 
 const Stack = createNativeStackNavigator();
@@ -65,8 +65,8 @@ const Main = () => {
             />
 
             <Stack.Screen
-                name="InstitutionList"
-                component={InstitutionList}
+                name="SponsorHome"
+                component={SponsorHome}
                 options={{
                     header: () => null,
                 }}

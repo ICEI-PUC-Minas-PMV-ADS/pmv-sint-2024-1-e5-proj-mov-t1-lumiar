@@ -53,6 +53,7 @@ export default function InstitutionHome({ route }) {
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.age}>{item.age} anos</Text>
             <Text>{item.description}</Text>
+            
             <View style={styles.buttonContainer}>
                 <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">Editar</Button>
                 <Button style={styles.button} buttonColor="#B52C2C" textColor="#FFF" onPress={() => showDialog(item._id)}>Apagar</Button>

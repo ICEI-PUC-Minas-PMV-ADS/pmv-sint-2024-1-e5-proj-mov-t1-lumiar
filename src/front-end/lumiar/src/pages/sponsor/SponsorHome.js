@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import api from '../../services/api';
 
-export default function InstitutionList() {
+export default function SponsorHome() {
   const navigation = useNavigation();
 
   const [institutions, setInstitutions] = useState([]);
@@ -22,7 +22,7 @@ export default function InstitutionList() {
   }, [])
 
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
+    <View style={styles.card} onPress={navigation.navigate('InstitutionHome')}>
       {/* <Image source={item.image} style={styles.image} /> */}
       <Text style={styles.name}>{item.name}</Text>
       <Text>{item.description}</Text>
