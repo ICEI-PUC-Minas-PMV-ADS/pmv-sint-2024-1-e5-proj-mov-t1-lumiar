@@ -59,8 +59,7 @@ export default function InstitutionHome({ route }) {
     }, []);
 
     const renderItem = ({ item }) => (
-
-        <TouchableOpacity onPress={() => showModal(item._id)} >
+        <TouchableOpacity onPress={() => !canEdit && showModal(item._id)} >
             <View style={styles.card}>
                 {/* <Image source={item.image} style={styles.image} /> */}
                 <Text style={styles.name}>{item.name}</Text>

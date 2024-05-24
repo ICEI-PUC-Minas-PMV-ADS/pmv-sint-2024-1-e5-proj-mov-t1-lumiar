@@ -6,8 +6,10 @@ export function KidModal({ onClose, isVisible, item }) {
   const { age = 0, name = '', description = '' } = item || {};
 
   const handleSponsorPress = () => {
-    onClose(); // Fechar o modal
-    navigation.navigate('PaymentSponsor'); // Navegar para a tela de pagamento
+    onClose(); 
+    navigation.navigate('PaymentSponsor', {
+      childId: item._id
+    });
   };
 
   return (

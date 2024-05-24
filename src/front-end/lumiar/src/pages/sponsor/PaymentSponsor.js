@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function PaymentSponsor() {
+import api from '../../services/api';
+
+export default function PaymentSponsor({ route }) {
+  const [donationValue, setDonationValue] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -13,8 +16,18 @@ export default function PaymentSponsor() {
   const [number, setNumber] = useState('');
   const [complement, setComplement] = useState('');
 
+
   const handlePayment = () => {
-    console.log('Dados enviados com sucesso');
+    api.post("/create-donation", {
+      value: donationValue,
+      child: '66298b07e5052d2575309bb5',
+      sponsor: '6644bc807050a2d8815b25e7'
+  })
+      .then(response => {
+          if (response.data.token) {
+             
+          } 
+      });
   };
 
   const handleCardNumberChange = (text) => {
@@ -40,11 +53,25 @@ export default function PaymentSponsor() {
     setNumber(text.replace(/[^0-9]/g, ''));
   };
 
+  const handleStringToNumberChange = (text) => {
+    const numericValue = text.replace(/[^0-9]/g, '');
+    setDonationValue(numericValue);
+  };
+
   return (
     <View style={styles.container}>
 
       <Text style={styles.title}>Pagamento</Text>
       <Text style={styles.subtitle}>Forneça os dados de pagamento para confirmar o apadrinhamento</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Valor da doação"
+        keyboardType="numeric"
+        value={donationValue}
+        onChangeText={handleStringToNumberChange}
+      />
+
 
       <TextInput
         style={styles.input}
@@ -87,8 +114,10 @@ export default function PaymentSponsor() {
         placeholder="CEP"
         keyboardType="numeric"
         value={cep}
+        type={'cep'}
         onChangeText={handleCepChange}
       />
+      
       <TextInput
         style={styles.input}
         placeholder="Estado"
