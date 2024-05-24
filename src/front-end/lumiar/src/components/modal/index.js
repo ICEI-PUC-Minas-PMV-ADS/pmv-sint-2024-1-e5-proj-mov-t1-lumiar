@@ -1,7 +1,14 @@
 import { View, Text, Modal, Pressable, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 export function KidModal({ onClose, isVisible, item }) {
+  const navigation = useNavigation();
   const { age = 0, name = '', description = '' } = item || {};
+
+  const handleSponsorPress = () => {
+    onClose(); // Fechar o modal
+    navigation.navigate('PaymentSponsor'); // Navegar para a tela de pagamento
+  };
 
   return (
     <Modal
@@ -27,7 +34,7 @@ export function KidModal({ onClose, isVisible, item }) {
           </View> */}
           <Text style={styles.kidSubtitle}>Um pouco da minha história</Text>
           <Text style={styles.kidText}>{item.description}</Text>
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={handleSponsorPress}>
             <Text style={styles.textStyle}>Apadrinhar</Text>
           </Pressable>
         </View>
