@@ -11,6 +11,7 @@ export default function InstitutionHome({ route }) {
     // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
     const [children, setChildren] = useState([]);
     const userId = route.params.userId;
+    const canEdit = route.params.canEdit;
     const [visible, setVisible] = React.useState(false);
     const [selectedChildId, setSelectedChildId] = useState(null);
 
@@ -24,7 +25,7 @@ export default function InstitutionHome({ route }) {
         setSelectedChildId(null);
     };
 
-    const getChildren = async () => {
+    const getChildrenList = async () => {
         api.get(`child/institution/${userId}`).then(({ data }) => {
             setChildren(data)
         });
@@ -43,7 +44,8 @@ export default function InstitutionHome({ route }) {
     }
 
     useEffect(() => {
-        getChildren();
+        console.log()
+        getChildrenList();
     }, []);
 
     const renderItem = ({ item }) => (
@@ -53,12 +55,24 @@ export default function InstitutionHome({ route }) {
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.age}>{item.age} anos</Text>
             <Text>{item.description}</Text>
-            
-            <View style={styles.buttonContainer}>
-                <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">Editar</Button>
-                <Button style={styles.button} buttonColor="#B52C2C" textColor="#FFF" onPress={() => showDialog(item._id)}>Apagar</Button>
-            </View>
 
+            {canEdit && (
+
+                <View style={styles.buttonContainer}>
+                    <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">
+                        Editar
+                    </Button>
+
+                    <Button
+                        style={styles.button}
+                        buttonColor="#B52C2C"
+                        textColor="#FFF"
+                        onPress={() => showDialog(item._id)}
+                    >
+                        Apagar
+                    </Button>
+                </View>
+            )}
         </View>
     );
 

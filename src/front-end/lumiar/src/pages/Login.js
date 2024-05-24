@@ -24,7 +24,7 @@ export default function Login() {
             })
                 .then(response => {
                     if (response.data.token) {
-                        navigation.navigate('SponsorHome');
+                        navigation.navigate('SponsorHome',  { userId: response.data.userId });
                     } else {
                         console.error('Login failed: ', response.data.message);
                     }
@@ -37,7 +37,7 @@ export default function Login() {
             })
                 .then(response => {
                     if (response.data.token) {
-                        navigation.navigate('InstitutionHome', { userId: response.data.userId });
+                        navigation.navigate('InstitutionHome', { userId: response.data.userId, canEdit: isSwitchOn });
                     } else {
                         console.error('Login failed: ', response.data.message);
                     }

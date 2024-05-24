@@ -4,8 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import api from '../../services/api';
+import { Button } from 'react-native-paper';
 
-export default function SponsorHome() {
+export default function SponsorHome({ route }) {
   const navigation = useNavigation();
 
   const [institutions, setInstitutions] = useState([]);
@@ -22,13 +23,18 @@ export default function SponsorHome() {
   }, [])
 
   const renderItem = ({ item }) => (
-    <View style={styles.card} onPress={navigation.navigate('InstitutionHome')}>
+    <TouchableOpacity onPress={() => navigation.navigate('InstitutionHome', {
+      userId: item._id
+    })}>
+      <View style={styles.card} >
       {/* <Image source={item.image} style={styles.image} /> */}
       <Text style={styles.name}>{item.name}</Text>
       <Text>{item.description}</Text>
       <Text style={styles.address}>{item.address.street}</Text>
       <Text>{item.address.district} - {item.address.state}</Text>
     </View>
+    </TouchableOpacity>
+    
   );
 
   return (
