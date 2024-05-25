@@ -17,7 +17,6 @@ export default function SetUser() {
                 />
                 <Text style={styles.txt}>Olá, Selecione uma opção para continuar com o cadastro!</Text>
 
-
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('SponsorRegistration')}>
                     <Text style={styles.textBtn}>Quero apadrinhar</Text>
