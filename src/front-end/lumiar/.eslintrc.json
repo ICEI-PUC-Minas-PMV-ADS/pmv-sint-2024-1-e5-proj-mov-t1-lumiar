@@ -1,0 +1,11 @@
+{
+    "extends": "@rocketseat/eslint-config/react",
+    "rules": {
+      "prettier/prettier": "error",
+      "camelcase": "off",
+      "no-console": "warn",
+      "no-param-reassign": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "no-void": "off"
+    }
+  }
