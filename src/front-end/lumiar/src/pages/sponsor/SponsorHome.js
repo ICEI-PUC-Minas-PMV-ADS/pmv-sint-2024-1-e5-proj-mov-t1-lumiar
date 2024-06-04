@@ -69,17 +69,22 @@ export default function SponsorHome({ route }) {
     getInstitution()
   }, [])
 
-  console.log(institutions)
-
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      {/* <Text style={styles.name}>{item.image}</Text> */}
-      <Image source={{ uri: item.image }} style={styles.image} />
-      <Text style={styles.name}>{item.name}</Text>
-      <Text>{item.description}</Text>
-      <Text style={styles.address}>{item.address.street}</Text>
-      <Text>{item.address.district} - {item.address.state}</Text>
-    </View>
+    <TouchableOpacity onPress={() => navigation.navigate('InstitutionHome', {
+      userId: item._id
+    })}>
+      <View style={styles.card} >
+        {/* <Image source={item.image} style={styles.image} /> */}
+        <View style={styles.card}>
+          {/* <Text style={styles.name}>{item.image}</Text> */}
+          <Image source={{ uri: item.image }} style={styles.image} />
+          <Text style={styles.name}>{item.name}</Text>
+          <Text>{item.description}</Text>
+          <Text style={styles.address}>{item.address.street}</Text>
+          <Text>{item.address.district} - {item.address.state}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 
 
