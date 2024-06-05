@@ -73,7 +73,7 @@ export default function SponsorHome({ route }) {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('InstitutionHome', {
-      userId: item._id
+      userId: item._id, institutionName: item.name
     })}>
         <View style={styles.card}>
           {/* <Text style={styles.name}>{item.image}</Text> */}

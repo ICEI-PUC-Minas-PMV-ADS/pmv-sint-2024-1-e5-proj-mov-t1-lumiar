@@ -14,6 +14,7 @@ export default function InstitutionHome({ route }) {
   const [children, setChildren] = useState([]);
   const userId = route.params.userId;
   const canEdit = route.params.canEdit;
+  const institutionName = route.params.institutionName;
   const [visible, setVisible] = React.useState(false);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -102,7 +103,13 @@ export default function InstitutionHome({ route }) {
     <View style={styles.container}>
       <Appbar.Header style={styles.header}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content style={styles.titleContainer} title="Crianças Cadastradas" />
+        {!institutionName &&
+          <Appbar.Content style={styles.titleContainer} title="Crianças Cadastradas" />
+        }
+        {institutionName &&
+          <Appbar.Content style={styles.titleContainer} title={institutionName} />
+        }
+
       </Appbar.Header>
 
       <FlatList
