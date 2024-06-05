@@ -5,8 +5,7 @@ const { validationDate } = require('../validation')
 
 class Child {
     static validateAndFormatChild(payload) {
-        const formattedPayload = { ...payload, entryData: new Date(payload.entryData) }
-        const { data, errorMessages } = validationDate('child', formattedPayload)
+        const { data, errorMessages } = validationDate('child', payload)
         if (errorMessages) {
             throw {
                 status: 400,
