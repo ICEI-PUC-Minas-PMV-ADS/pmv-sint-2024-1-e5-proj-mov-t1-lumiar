@@ -28,12 +28,12 @@ export function KidModal({ onClose, isVisible, item }) {
             {item.name}
           </Text>
           <Text style={styles.kidAge}>{`${item.age} anos`}</Text>
-          {/* <View style={styles.kidImageContainer}>
+          <View style={styles.kidImageContainer}>
             <Image
               source={item.image}
               style={styles.kidImage}
             />
-          </View> */}
+          </View>
           <Text style={styles.kidSubtitle}>Um pouco da minha história</Text>
           <Text style={styles.kidText}>{item.description}</Text>
           <Pressable style={styles.button} onPress={handleSponsorPress}>
@@ -46,6 +46,14 @@ export function KidModal({ onClose, isVisible, item }) {
 };
 
 const styles = {
+  modalView: {
+    margin: 24,
+    backgroundColor: '#F0EAEA',
+    borderRadius: '5px',
+    padding: 12,
+    display: 'flex',
+    flexDirection: 'column',
+  },
   kidImageContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -60,7 +68,8 @@ const styles = {
   kidTitleName: {
     color: '#51782C',
     fontSize: '20px',
-    marginBottom: '8px'
+    marginBottom: '8px',
+    fontWeight: 'bold'
   },
   kidAge: {
     color: '#000000',
@@ -70,30 +79,21 @@ const styles = {
   kidSubtitle: {
     color: '#51782C',
     fontSize: '16px',
-    marginBottom: '8px'
+    marginBottom: '8px',
+    fontWeight: 'bold'
   },
   kidText: {
     color: '#000000',
     fontSize: '13px',
     marginBottom: '8px'
   },
-  modalView: {
-    margin: 24,
-    background: '#FFF',
-    borderRadius: '5px',
-    padding: 12,
-    display: 'flex',
-    flexDirection: 'column',
-  },
+  
   button: {
-    marginTop: '24px',
-    background: '#51782C',
-    width: '180px',
-    borderRadius: 20,
-    alignSelf: 'center',
-    padding: 10,
-    elevation: 2,
-  },
+    backgroundColor: '#51782C',
+    paddingVertical: 15,
+    borderRadius: 50,
+    marginTop: 20,
+},
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
