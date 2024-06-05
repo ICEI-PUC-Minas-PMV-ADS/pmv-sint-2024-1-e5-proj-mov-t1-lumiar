@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import * as ImagePicker from 'expo-image-picker';
+import { Appbar } from 'react-native-paper';
 import { firebase } from '../../../config'
 import * as FileSystem from 'expo-file-system'
 import { TextInputMask } from 'react-native-masked-text';
@@ -131,14 +132,10 @@ export default function ChildRegister({ route }) {
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.container}>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <FontAwesome name="chevron-left" size={24} style={styles.icon} />
-                        </TouchableOpacity>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title}>Dados da Criança</Text>
-                        </View>
-                    </View>
+                    <Appbar.Header style={styles.header}>
+                        <Appbar.BackAction onPress={() => navigation.goBack()} />
+                        <Appbar.Content style={styles.titleContainer} title="Dados da Criança" />
+                    </Appbar.Header>
 
                     {!images &&
                         <View style={styles.imagePickerContainer}>
@@ -244,28 +241,22 @@ export default function ChildRegister({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 20
+        paddingHorizontal: 10,
+        backgroundColor: '#FFF'
     },
     scrollContainer: {
         flexGrow: 1,
     },
     header: {
         flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 20,
+        backgroundColor: '#FFF'
     },
     icon: {
         color: '#000',
     },
     titleContainer: {
         flexDirection: 'column',
-        marginBottom: 20
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        alignItems: 'flex-start',
     },
     subtitle: {
         fontSize: 18,

@@ -12,6 +12,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import * as ImagePicker from 'expo-image-picker'
+import { Appbar } from 'react-native-paper';
 import { firebase } from '../../../config'
 import * as FileSystem from 'expo-file-system'
 import api from '../../services/api';
@@ -34,7 +35,7 @@ export default function SponsorHome({ route }) {
     })
     if (!result.cancelled) {
       setImage(result.assets[0].uri)
-     
+
     }
   }
 
@@ -74,8 +75,6 @@ export default function SponsorHome({ route }) {
     <TouchableOpacity onPress={() => navigation.navigate('InstitutionHome', {
       userId: item._id
     })}>
-      <View style={styles.card} >
-        {/* <Image source={item.image} style={styles.image} /> */}
         <View style={styles.card}>
           {/* <Text style={styles.name}>{item.image}</Text> */}
           <Image source={{ uri: item.image }} style={styles.image} />
@@ -84,22 +83,16 @@ export default function SponsorHome({ route }) {
           <Text style={styles.address}>{item.address.street}</Text>
           <Text>{item.address.district} - {item.address.state}</Text>
         </View>
-      </View>
     </TouchableOpacity>
   );
 
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesome name="chevron-left" size={24} style={styles.icon} />
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Instituições</Text>
-          <Text style={styles.subtitle}>Selecione para saber mais</Text>
-        </View>
-      </View>
+      <Appbar.Header style={styles.header}>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content style={styles.titleContainer} title="Instituições" />
+      </Appbar.Header>
 
       <FlatList
         data={institutions}
@@ -114,13 +107,8 @@ export default function SponsorHome({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     paddingHorizontal: 20,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 10,
   },
   button: {
     backgroundColor: '#DDDDDD',
@@ -129,16 +117,11 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+    backgroundColor: '#FFF'
   },
   titleContainer: {
     flexDirection: 'column',
-    marginLeft: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    alignItems: 'flex-start',
   },
   subtitle: {
     fontSize: 18,

@@ -2,47 +2,68 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Appbar } from 'react-native-paper';
 
 export default function ProfileInstitution() {
 
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
+        <View style={styles.main}>
+            <Appbar.Header style={styles.header}>
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
+                <Appbar.Content style={styles.titleContainer} title="Perfil" />
+            </Appbar.Header>
 
-            <Image source={require('../../../assets/user.png')} style={styles.profileImage} />
+            <View style={styles.container}>
 
-            <Text style={styles.greetingText}>Olá, [nome]</Text>
+                <Image source={require('../../../assets/user.png')} style={styles.profileImage} />
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome name="user" size={20} color="white" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>Informações da instituição</Text>
-            </TouchableOpacity>
+                <Text style={styles.greetingText}>Olá, [nome]</Text>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome name="child" size={20} color="white" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>Lista de crianças</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <FontAwesome name="user" size={20} color="white" style={styles.buttonIcon} />
+                    <Text style={styles.buttonText}>Informações da instituição</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome name="lock" size={20} color="white" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>Alterar Senha</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <FontAwesome name="child" size={20} color="white" style={styles.buttonIcon} />
+                    <Text style={styles.buttonText}>Lista de crianças</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-                <FontAwesome name="sign-out" size={20} color="white" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>Sair</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <FontAwesome name="lock" size={20} color="white" style={styles.buttonIcon} />
+                    <Text style={styles.buttonText}>Alterar Senha</Text>
+                </TouchableOpacity>
 
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                    <FontAwesome name="sign-out" size={20} color="white" style={styles.buttonIcon} />
+                    <Text style={styles.buttonText}>Sair</Text>
+                </TouchableOpacity>
+
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    main: {
+        flex: 1,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 20,
+    },
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    header: {
+        flexDirection: 'row',
+        backgroundColor: '#FFF'
+    },
+    titleContainer: {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
     },
     profileImage: {
         width: 100,

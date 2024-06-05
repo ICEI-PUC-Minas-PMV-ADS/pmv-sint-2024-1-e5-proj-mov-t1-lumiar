@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Appbar } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'
 
 import api from '../../services/api';
 
 export default function PaymentSponsor({ route }) {
+  const navigation = useNavigation();
+
   const [donationValue, setDonationValue] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
@@ -22,11 +26,11 @@ export default function PaymentSponsor({ route }) {
       value: donationValue,
       child: '66298b07e5052d2575309bb5',
       sponsor: '6644bc807050a2d8815b25e7'
-  })
+    })
       .then(response => {
-          if (response.data.token) {
-             
-          } 
+        if (response.data.token) {
+
+        }
       });
   };
 
@@ -61,7 +65,10 @@ export default function PaymentSponsor({ route }) {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.title}>Pagamento</Text>
+      <Appbar.Header style={styles.header}>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content style={styles.titleContainer} title="Pagamento" />
+      </Appbar.Header>
       <Text style={styles.subtitle}>Forneça os dados de pagamento para confirmar o apadrinhamento</Text>
 
       <TextInput
@@ -117,7 +124,7 @@ export default function PaymentSponsor({ route }) {
         type={'cep'}
         onChangeText={handleCepChange}
       />
-      
+
       <TextInput
         style={styles.input}
         placeholder="Estado"
@@ -161,17 +168,20 @@ export default function PaymentSponsor({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    backgroundColor: '#FFF',
   },
   subtitle: {
     fontSize: 16,
     marginBottom: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    backgroundColor: '#FFF'
+  },
+  titleContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   input: {
     borderWidth: 1,

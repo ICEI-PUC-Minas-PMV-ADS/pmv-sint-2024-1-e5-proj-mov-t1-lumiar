@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Appbar } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
@@ -100,14 +100,10 @@ export default function InstitutionHome({ route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesome name="chevron-left" size={24} style={styles.icon} />
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Crianças Cadastradas</Text>
-        </View>
-      </View>
+      <Appbar.Header style={styles.header}>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content style={styles.titleContainer} title="Crianças Cadastradas" />
+      </Appbar.Header>
 
       <FlatList
         data={children}
@@ -141,16 +137,11 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+    backgroundColor: '#FFF'
   },
   titleContainer: {
     flexDirection: 'column',
-    marginLeft: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    alignItems: 'flex-start',
   },
   card: {
     marginBottom: 20,
