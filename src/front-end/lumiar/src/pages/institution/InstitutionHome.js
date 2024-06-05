@@ -4,10 +4,12 @@ import { Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
+import { useNavigation } from '@react-navigation/native'
 
 import api from '../../services/api'
 
 export default function InstitutionHome({ route }) {
+  const navigation = useNavigation();
   // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
   const [children, setChildren] = useState([]);
   const userId = route.params.userId;
@@ -79,9 +81,16 @@ export default function InstitutionHome({ route }) {
             >
               Apagar
             </Button>
+
+            <Button style={styles.button} onPress={() => navigation.navigate('ChildRegister', {
+              userId: userId
+            })} >Add criança</Button>
+
           </View>
         )}
       </View>
+
+
     </TouchableOpacity>
 
   );

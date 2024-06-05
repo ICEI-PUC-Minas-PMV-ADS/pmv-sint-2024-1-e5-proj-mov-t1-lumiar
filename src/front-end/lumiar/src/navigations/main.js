@@ -11,6 +11,7 @@ import EscolhaDeUser from '../pages/apagarDepois/EscolhaDeUser';
 import PaymentSponsor from '../pages/sponsor/PaymentSponsor.js';
 import SponsorHome from '../pages/sponsor/SponsorHome.js';
 import SetUser from '../pages/SetUser.js';
+import ChildRegister from '../pages/institution/ChildRegister.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -84,13 +85,21 @@ const Main = () => {
                 name="InstitutionHome"
                 component={InstitutionHome}
                 options={{
-                   header: () => null
+                    header: () => null
                 }}
             />
 
             <Stack.Screen
                 name="SetUser"
                 component={SetUser}
+                options={{
+                    header: () => null,
+                }}
+            />
+
+            <Stack.Screen
+                name="ChildRegister"
+                component={ChildRegister}
                 options={{
                     header: () => null,
                 }}

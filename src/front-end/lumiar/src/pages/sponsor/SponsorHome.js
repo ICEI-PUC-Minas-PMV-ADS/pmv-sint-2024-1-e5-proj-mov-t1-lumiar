@@ -34,6 +34,7 @@ export default function SponsorHome({ route }) {
     })
     if (!result.cancelled) {
       setImage(result.assets[0].uri)
+     
     }
   }
 
