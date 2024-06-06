@@ -6,7 +6,6 @@ module.exports = {
         age: 12,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         institution: new mongoose.Types.ObjectId(),
-        entryData: new Date('2023-01-01'),
         address: {
             street: '123 Main St',
             district: 'Downtown',

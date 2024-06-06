@@ -21,7 +21,6 @@ const childSchema = z.object({
     age: z.number().max(16),
     description: z.string(),
     institution: objectIdSchema,
-    entryData: z.date(),
     address: addressSchema,
 })
 

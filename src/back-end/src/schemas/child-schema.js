@@ -5,7 +5,6 @@ module.exports = new Schema({
     age: { type: Number, default: null },
     description: { type: String, default: null },
     institution: Schema.Types.ObjectId,
-    entryData: { type: Date, default: Date.now },
     address: { type: Object, default: null },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: null },
