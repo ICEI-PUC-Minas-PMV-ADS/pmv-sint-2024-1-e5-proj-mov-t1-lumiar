@@ -10,7 +10,6 @@ import {
   SafeAreaView,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import * as ImagePicker from 'expo-image-picker'
 import { Appbar } from 'react-native-paper';
 import { firebase } from '../../../config'

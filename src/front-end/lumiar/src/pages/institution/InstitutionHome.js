@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Button, Appbar } from 'react-native-paper';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Button, Appbar, FAB, useTheme, Icon } from 'react-native-paper';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
 import { useNavigation } from '@react-navigation/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+
 
 import api from '../../services/api'
 
+const BOTTOM_APPBAR_HEIGHT = 80;
+const MEDIUM_FAB_HEIGHT = 100;
+
 export default function InstitutionHome({ route }) {
+  const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
+
   const navigation = useNavigation();
   // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
   const [children, setChildren] = useState([]);
@@ -62,7 +70,7 @@ export default function InstitutionHome({ route }) {
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => !canEdit && showModal(item._id)} >
       <View style={styles.card}>
-        {/* <Image source={item.image} style={styles.image} /> */}
+        <Image source={item.image} style={styles.image} />
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.age}>{item.age} anos</Text>
         <Text>{item.description}</Text>
@@ -82,11 +90,6 @@ export default function InstitutionHome({ route }) {
             >
               Apagar
             </Button>
-
-            <Button style={styles.button} onPress={() => navigation.navigate('ChildRegister', {
-              userId: userId
-            })} >Add criança</Button>
-
           </View>
         )}
       </View>
@@ -98,7 +101,6 @@ export default function InstitutionHome({ route }) {
 
   const selectedItem = children.find(child => child._id === selectedChildId) || {};
 
-
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.header}>
@@ -109,7 +111,6 @@ export default function InstitutionHome({ route }) {
         {institutionName &&
           <Appbar.Content style={styles.titleContainer} title={institutionName} />
         }
-
       </Appbar.Header>
 
       <FlatList
@@ -131,6 +132,28 @@ export default function InstitutionHome({ route }) {
         isVisible={modalVisible}
         item={selectedItem}
       />
+
+      {canEdit && 
+        <Appbar
+          style={[
+            styles.bottom,
+          ]}
+          safeAreaInsets={{ bottom }}
+        >
+          <FAB
+            mode="elevated"
+            size="medium"
+            icon="plus"
+            onPress={() => navigation.navigate('ChildRegister', {
+              userId: userId
+            })}
+            style={[
+              styles.fab,
+              { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+            ]}
+          />
+        </Appbar>
+      }
 
     </View>
   );
@@ -170,6 +193,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
   },
+  image: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
   button: {
     width: 100,
     borderRadius: 50,
@@ -181,5 +210,18 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingTop: 20,
+  },
+  bottom: {
+    backgroundColor: '#FFF',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+    backgroundColor: '#D9D9D9',
+    borderRadius: '50'
   },
 })
