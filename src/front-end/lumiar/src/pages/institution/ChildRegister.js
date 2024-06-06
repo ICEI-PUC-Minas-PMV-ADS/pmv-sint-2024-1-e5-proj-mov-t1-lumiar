@@ -121,7 +121,7 @@ export default function ChildRegister({ route }) {
             .then((response) => {
                 if (response.data) {
                     setVisible = true;
-                    navigation.navigate('InstitutionHome')
+                    navigation.navigate('InstitutionHome',  {userId: userId })
                 }
             });
     };

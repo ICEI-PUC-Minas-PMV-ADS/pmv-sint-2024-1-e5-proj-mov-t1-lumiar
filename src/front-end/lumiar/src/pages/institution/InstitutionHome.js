@@ -70,15 +70,22 @@ export default function InstitutionHome({ route }) {
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => !canEdit && showModal(item._id)} >
       <View style={styles.card}>
-        <Image source={item.image} style={styles.image} />
+        <Image source={{ uri: item.image }} style={styles.image} />
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.age}>{item.age} anos</Text>
-        <Text>{item.description}</Text>
+        <Text numberOfLines={3}>{item.description}</Text>
 
         {canEdit && (
 
           <View style={styles.buttonContainer}>
-            <Button style={styles.button} buttonColor="#C693C6" textColor="#FFF">
+            <Button
+              style={styles.button}
+              buttonColor="#BAB7B7"
+              textColor="#FFF"
+              onPress={() => navigation.navigate('ChildRegister', {
+                userId: userId
+              })}
+            >
               Editar
             </Button>
 
@@ -133,10 +140,11 @@ export default function InstitutionHome({ route }) {
         item={selectedItem}
       />
 
-      {canEdit && 
+      {canEdit &&
         <Appbar
           style={[
             styles.bottom,
+
           ]}
           safeAreaInsets={{ bottom }}
         >
@@ -212,7 +220,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   bottom: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'transparent',
     position: 'absolute',
     left: 0,
     right: 0,

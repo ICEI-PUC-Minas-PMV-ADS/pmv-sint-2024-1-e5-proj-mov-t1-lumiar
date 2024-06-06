@@ -75,7 +75,6 @@ export default function SponsorHome({ route }) {
       userId: item._id, institutionName: item.name
     })}>
         <View style={styles.card}>
-          {/* <Text style={styles.name}>{item.image}</Text> */}
           <Image source={{ uri: item.image }} style={styles.image} />
           <Text style={styles.name}>{item.name}</Text>
           <Text>{item.description}</Text>
