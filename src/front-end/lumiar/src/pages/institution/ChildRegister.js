@@ -336,7 +336,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        height: 200,
+
     },
     image: {
         width: 350,
