@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import * as ImagePicker from 'expo-image-picker';
-import { Appbar } from 'react-native-paper';
+import { Appbar, TextInput } from 'react-native-paper';
 import { firebase } from '../../../config'
 import * as FileSystem from 'expo-file-system'
-import { TextInputMask } from 'react-native-masked-text';
 
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native'
@@ -13,6 +12,8 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function ChildRegister({ route }) {
     const navigation = useNavigation();
+    const userId = route.params.userId;
+    const child = route.params.child;
 
     const [images, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
@@ -25,16 +26,28 @@ export default function ChildRegister({ route }) {
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
     const [address, setAddress] = useState('');
-    const [number, setNumber] = useState('');
-    const [complement, setComplement] = useState('');
     const [age, setAge] = useState(null);
-    const userId = route.params.userId;
+
+
+    useEffect(() => {
+        if (child) {
+            setImage(child.image)
+            setName(child.name);
+            setBirthDate(child.birthDate);
+            setCpf(child.cpf);
+            setDescription(child.description);
+            setCep(child.address.cep);
+            setState(child.address.state);
+            setCity(child.address.district);
+            setAddress(child.address.street);
+        }
+    }, [child]);
 
     const calculateAge = (date) => {
         const [day, month, year] = date.split('/').map(Number);
         const today = new Date();
         let age = today.getFullYear() - year;
-        const monthDiff = today.getMonth() + 1 - month; // Janeiro é 0, então adicionamos 1
+        const monthDiff = today.getMonth() + 1 - month;
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < day)) {
             age--;
         }
@@ -42,7 +55,7 @@ export default function ChildRegister({ route }) {
     };
 
     const handleBirthDate = (text) => {
-        const formattedText = text.replace(/[^0-9]/g, ''); // Remove todos os caracteres que não são números
+        const formattedText = text.replace(/[^0-9]/g, '');
         let formattedDate = formattedText;
         if (formattedText.length > 2 && formattedText.length <= 4) {
             formattedDate = `${formattedText.slice(0, 2)}/${formattedText.slice(2)}`;
@@ -60,12 +73,23 @@ export default function ChildRegister({ route }) {
     };
 
     const handleCepChange = (text) => {
-        const formattedText = text.replace(/[^0-9]/g, ''); // Remove todos os caracteres que não são números
+        const formattedText = text.replace(/[^0-9]/g, '');
         let formattedCep = formattedText;
         if (formattedText.length > 5) {
             formattedCep = `${formattedText.slice(0, 5)}-${formattedText.slice(5, 8)}`;
         }
         setCep(formattedCep);
+    };
+
+    const handleCpfChange = (text) => {
+        const formattedText = text
+            .replace(/\D/g, '')
+            .slice(0, 11)
+            .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+            .replace(/(\d{3})(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/(\d{3})(\d)/, '$1.$2');
+
+        setCpf(formattedText);
     };
 
     const uploadMediaFile = async () => {
@@ -121,12 +145,34 @@ export default function ChildRegister({ route }) {
             .then((response) => {
                 if (response.data) {
                     setVisible = true;
-                    navigation.navigate('InstitutionHome',  {userId: userId })
+                    navigation.navigate('InstitutionHome', { userId: userId })
                 }
             });
     };
 
-
+    const updateChild = () => {
+        uploadImage
+        api.put(`child/${child._id}`, {
+            name: name,
+            age: 7,
+            description: description,
+            institution: userId,
+            address: {
+                street: address,
+                district: city,
+                state: state,
+                country: 'Brasil',
+                cep: cep,
+            },
+            image: images
+        })
+            .then((response) => {
+                if (response.data) {
+                    setVisible = true;
+                    navigation.navigate('InstitutionHome', { userId: userId })
+                }
+            });
+    };
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -138,12 +184,12 @@ export default function ChildRegister({ route }) {
                     </Appbar.Header>
 
                     {!images &&
-                        <View style={styles.imagePickerContainer}>
+                        <View style={styles.imagePickerContainer} backgroundColor={'#D9D9D9'}>
                             <Button title="Adicionar Imagem" onPress={uploadMediaFile} />
                         </View>
                     }
                     {images &&
-                        <View>
+                        <View style={styles.imagePickerContainer}>
                             <Button title="Trocar Imagem" onPress={uploadMediaFile} />
                             <Image source={{ uri: images }} style={styles.image} />
                         </View>
@@ -152,7 +198,8 @@ export default function ChildRegister({ route }) {
                     <Text style={styles.subtitle}>Informações Pessoais</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Nome Completo"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Nome"
                         keyboardType="text"
                         value={name}
                         onChangeText={setName}
@@ -161,27 +208,29 @@ export default function ChildRegister({ route }) {
 
                     <TextInput
                         style={styles.input}
-                        placeholder="Data de nascimento"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Data de nascimento"
                         keyboardType="numeric"
                         value={birthDate}
                         onChangeText={handleBirthDate}
                     />
 
-                    <TextInputMask
+                    <TextInput
                         style={styles.input}
-                        placeholder="CPF"
+                        activeUnderlineColor={'#C693C6'}
+                        label="CPF"
                         keyboardType='numeric'
-                        type={'cpf'}
                         value={cpf}
-                        onChangeText={text => setCpf(text)}
+                        onChangeText={handleCpfChange}
                     />
 
                     <TextInput
                         style={styles.input}
-                        placeholder="Descrição"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Descrição"
                         keyboardType="text"
                         multiline={true}
-                        height={100}
+                        height={200}
                         value={description}
                         onChangeText={setDescription}
                     />
@@ -190,7 +239,8 @@ export default function ChildRegister({ route }) {
 
                     <TextInput
                         style={styles.input}
-                        placeholder="CEP"
+                        activeUnderlineColor={'#C693C6'}
+                        label="CEP"
                         keyboardType="numeric"
                         value={cep}
                         onChangeText={handleCepChange}
@@ -198,39 +248,37 @@ export default function ChildRegister({ route }) {
 
                     <TextInput
                         style={styles.input}
-                        placeholder="Estado"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Estado"
                         value={state}
                         onChangeText={setState}
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder="Cidade"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Cidade"
                         value={city}
                         onChangeText={setCity}
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder="Logradouro"
+                        activeUnderlineColor={'#C693C6'}
+                        label="Logradouro"
                         value={address}
                         onChangeText={setAddress}
                     />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Número"
-                        keyboardType="numeric"
-                        value={number}
-                        onChangeText={setNumber}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Complemento"
-                        value={complement}
-                        onChangeText={setComplement}
-                    />
+                    {!child &&
+                        <TouchableOpacity style={styles.button} onPress={newChild}>
+                            <Text style={styles.buttonText}>Salvar</Text>
+                        </TouchableOpacity>
+                    }
 
-                    <TouchableOpacity style={styles.button} onPress={newChild}>
-                        <Text style={styles.buttonText}>Salvar</Text>
-                    </TouchableOpacity>
+                    {child &&
+                        <TouchableOpacity style={styles.button} onPress={updateChild}>
+                            <Text style={styles.buttonText}>Salvar</Text>
+                        </TouchableOpacity>
+                    }
+
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -260,14 +308,13 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 18,
+        marginTop: 20
     },
     input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 15,
         marginBottom: 10,
+        backgroundColor: 'transparent',
     },
     inline: {
         flexDirection: 'row',
@@ -289,11 +336,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#D9D9D9',
         marginBottom: 20
     },
     image: {
         width: 350,
         height: 200,
+        alignItems: 'center'
     },
 });

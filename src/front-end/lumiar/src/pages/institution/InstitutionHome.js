@@ -74,6 +74,7 @@ export default function InstitutionHome({ route }) {
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.age}>{item.age} anos</Text>
         <Text numberOfLines={3}>{item.description}</Text>
+        <Text numberOfLines={3}>{item.cpf}</Text>
 
         {canEdit && (
 
@@ -83,6 +84,7 @@ export default function InstitutionHome({ route }) {
               buttonColor="#BAB7B7"
               textColor="#FFF"
               onPress={() => navigation.navigate('ChildRegister', {
+                child: item,
                 userId: userId
               })}
             >
