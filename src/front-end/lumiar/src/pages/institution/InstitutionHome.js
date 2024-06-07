@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 import { Button, Appbar, FAB, useTheme, Icon } from 'react-native-paper';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
 import { useNavigation } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -63,9 +64,11 @@ export default function InstitutionHome({ route }) {
     }
   }
 
-  useEffect(() => {
-    getChildrenList();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+        getChildrenList();
+    }, [])
+);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => !canEdit && showModal(item._id)} >

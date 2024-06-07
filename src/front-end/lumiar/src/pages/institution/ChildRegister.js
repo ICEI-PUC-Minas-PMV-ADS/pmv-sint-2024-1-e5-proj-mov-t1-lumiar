@@ -145,7 +145,7 @@ export default function ChildRegister({ route }) {
             .then((response) => {
                 if (response.data) {
                     setVisible = true;
-                    navigation.navigate('InstitutionHome', { userId: userId })
+                    navigation.navigate('InstitutionHome', { userId: userId, canEdit: true })
                 }
             });
     };
@@ -169,7 +169,7 @@ export default function ChildRegister({ route }) {
             .then((response) => {
                 if (response.data) {
                     setVisible = true;
-                    navigation.navigate('InstitutionHome', { userId: userId })
+                    navigation.navigate('InstitutionHome', { userId: userId, canEdit: true });
                 }
             });
     };
@@ -290,6 +290,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 10,
+        paddingVertical: 10,
         backgroundColor: '#FFF'
     },
     scrollContainer: {

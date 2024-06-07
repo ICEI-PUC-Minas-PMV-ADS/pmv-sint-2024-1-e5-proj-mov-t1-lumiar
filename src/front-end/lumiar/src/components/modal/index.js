@@ -6,7 +6,7 @@ export function KidModal({ onClose, isVisible, item }) {
   const { age = 0, name = '', description = '' } = item || {};
 
   const handleSponsorPress = () => {
-    onClose(); 
+    onClose();
     navigation.navigate('PaymentSponsor', {
       childId: item._id
     });
@@ -29,10 +29,7 @@ export function KidModal({ onClose, isVisible, item }) {
           </Text>
           <Text style={styles.kidAge}>{`${item.age} anos`}</Text>
           <View style={styles.kidImageContainer}>
-            <Image
-              source={item.image}
-              style={styles.kidImage}
-            />
+            <Image source={{ uri: item.image }} style={styles.kidImage} />
           </View>
           <Text style={styles.kidSubtitle}>Um pouco da minha história</Text>
           <Text style={styles.kidText}>{item.description}</Text>
@@ -62,8 +59,9 @@ const styles = {
   kidImage: {
     width: '100%',
     height: 162,
-    borderRadius: '5px',
-    marginBottom: '12px'
+    borderRadius: 10,
+    marginBottom: 20,
+    marginTop: 20
   },
   kidTitleName: {
     color: '#51782C',
@@ -87,13 +85,13 @@ const styles = {
     fontSize: '13px',
     marginBottom: '8px'
   },
-  
+
   button: {
     backgroundColor: '#51782C',
     paddingVertical: 15,
     borderRadius: 50,
     marginTop: 20,
-},
+  },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
