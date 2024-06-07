@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
-import { Snackbar } from 'react-native-paper';
+import { Snackbar, TextInput } from 'react-native-paper';
 
 import api from '../../services/api';
 
@@ -19,6 +18,17 @@ export default function SponsorRegistration() {
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     const [visible, setVisible] = useState(false);
 
+    const handleCpfChange = (text) => {
+        const formattedText = text
+            .replace(/\D/g, '')
+            .slice(0, 11)
+            .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+            .replace(/(\d{3})(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/(\d{3})(\d)/, '$1.$2');
+
+        setCpf(formattedText);
+    };
+
     const onDismissSnackBar = () => setVisible(false);
 
     const newSponsor = () => {
@@ -32,7 +42,7 @@ export default function SponsorRegistration() {
         })
             .then((response) => {
                 if (response.data) {
-                   setVisible = true;
+                    setVisible = true;
                     navigation.navigate('Login')
                 }
             });
@@ -48,81 +58,75 @@ export default function SponsorRegistration() {
                 <View style={styles.formContainer}>
                     <Text style={styles.signUpTxt}>Cadastre-se</Text>
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Nome"
-                            value={name}
-                            onChangeText={text => setName(text)}
-                            keyboardType='default'
-                        />
-                    </View>
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="E-mail"
-                            value={email}
-                            onChangeText={text => setEmail(text)}
-                            keyboardType='email-address'
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Nome"
+                        value={name}
+                        onChangeText={text => setName(text)}
+                        keyboardType='default'
+                    />
 
-                    <View style={styles.inputView}>
-                        <TextInputMask
-                            style={styles.inputText}
-                            placeholder="CPF"
-                            keyboardType='numeric'
-                            type={'cpf'}
-                            value={cpf}
-                            onChangeText={text => setCpf(text)}
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="E-mail"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        keyboardType='email-address'
+                    />
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Idade"
-                            value={age}
-                            onChangeText={text => setAge(text)}
-                            keyboardType='numeric'
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="CPF"
+                        keyboardType='numeric'
+                        value={cpf}
+                        onChangeText={handleCpfChange}
+                    />
 
-                    <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Idade"
+                        value={age}
+                        onChangeText={text => setAge(text)}
+                        keyboardType='numeric'
+                    />
 
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Senha"
-                            value={password}
-                            onChangeText={text => setPassword(text)}
-                            keyboardType='default'
-                            secureTextEntry={!passwordVisible}
-                        />
-                        <FontAwesome
-                            name={passwordVisible ? 'eye-slash' : 'eye'}
-                            size={20}
-                            style={styles.passwordIcon}
-                            onPress={() => setPasswordVisible(!passwordVisible)}
-                        />
-                    </View>
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Confirme sua senha"
-                            value={confirmPassword}
-                            onChangeText={text => setConfirmPassword(text)}
-                            keyboardType='default'
-                            secureTextEntry={!confirmPasswordVisible}
-                        />
-                        <FontAwesome
-                            name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
-                            size={20}
-                            style={styles.passwordIcon}
-                            onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Senha"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        keyboardType='default'
+                        secureTextEntry={!passwordVisible}
+                    />
+                    <FontAwesome
+                        name={passwordVisible ? 'eye-slash' : 'eye'}
+                        size={20}
+                        style={styles.passwordIcon}
+                        onPress={() => setPasswordVisible(!passwordVisible)}
+                    />
+
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Confirme sua senha"
+                        value={confirmPassword}
+                        onChangeText={text => setConfirmPassword(text)}
+                        keyboardType='default'
+                        secureTextEntry={!confirmPasswordVisible}
+                    />
+                    <FontAwesome
+                        name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
+                        size={20}
+                        style={styles.passwordIcon}
+                        onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                    />
 
                     <TouchableOpacity style={styles.btnRegister} onPress={() => newSponsor()} >
                         <Text style={styles.registerTextBtn}>Cadastrar</Text>
@@ -188,23 +192,12 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         marginTop: 20,
     },
-    inputView: {
-        width: '85%',
-        backgroundColor: '#E7E7E7',
-        borderRadius: 25,
-        height: 50,
-        marginBottom: 20,
-        justifyContent: 'center',
-        padding: 20,
-        alignSelf: 'center',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     inputText: {
-        flex: 1,
-        height: 40,
-        paddingHorizontal: 10,
-        color: '#000000'
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        marginBottom: 10,
+        backgroundColor: 'transparent',
+        width: '80%'
 
     },
     btnRegister: {

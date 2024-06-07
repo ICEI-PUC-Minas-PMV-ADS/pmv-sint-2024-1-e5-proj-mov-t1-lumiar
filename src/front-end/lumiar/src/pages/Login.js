@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
   Image,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native'
-import { Switch } from 'react-native-paper'
+import { Switch, TextInput } from 'react-native-paper'
 
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons'
@@ -66,19 +65,19 @@ export default function Login() {
       <View style={styles.formContainer}>
         <Text style={styles.loginTxt}>Login</Text>
 
-        <View style={styles.inputView}>
+        
           <TextInput
-            style={styles.inputText}
-            placeholder="Usuário"
+            style={styles.input}
+            activeUnderlineColor={'#C693C6'}
+            label="Usuário"
             value={userName}
             onChangeText={(text) => setUserName(text)}
           />
-        </View>
 
-        <View style={styles.inputView}>
           <TextInput
-            style={styles.inputText}
-            placeholder="Senha"
+            style={styles.input}
+            activeUnderlineColor={'#C693C6'}
+            label="Senha"
             secureTextEntry={!passwordVisible}
             value={password}
             onChangeText={(text) => setPassword(text)}
@@ -89,7 +88,6 @@ export default function Login() {
             style={styles.passwordIcon}
             onPress={() => setPasswordVisible(!passwordVisible)}
           />
-        </View>
 
         <View style={styles.setUser}>
           <Switch
@@ -134,8 +132,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageLogo: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     resizeMode: 'contain',
   },
   loginTxt: {
@@ -145,24 +143,13 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     marginTop: 20,
   },
-  inputView: {
-    width: '80%',
-    backgroundColor: '#E7E7E7',
-    borderRadius: 30,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: 'center',
-    padding: 20,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inputText: {
-    flex: 1,
-    height: 50,
-    paddingHorizontal: 10,
-    color: '#000000',
-  },
+  input: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    backgroundColor: 'transparent',
+    width: '80%'
+},
   setUser: {
     width: '80%',
     marginLeft: 10,
@@ -219,6 +206,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    paddingBottom: 10
   },
   passwordIcon: {
     paddingBottom: 20,

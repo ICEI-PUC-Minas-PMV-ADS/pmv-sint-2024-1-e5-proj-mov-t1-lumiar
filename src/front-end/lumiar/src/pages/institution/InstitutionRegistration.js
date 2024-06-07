@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -15,6 +15,19 @@ export default function InstitutionRegistration() {
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    const handleCnpjChange = (text) => {
+        let formattedText = text.replace(/\D/g, '');
+
+        formattedText = formattedText.slice(0, 14);
+
+        formattedText = formattedText.replace(/^(\d{2})(\d)/, '$1.$2')
+            .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3/$4')
+            .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, '$1.$2.$3/$4-$5');
+
+        setCnpj(formattedText);
+    };
 
     const newInstitution = () => {
         api.post("institution", {
@@ -52,82 +65,74 @@ export default function InstitutionRegistration() {
                 <View style={styles.formContainer} >
                     <Text style={styles.signUpTxt}>Cadastre-se</Text>
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Nome da instituição"
-                            value={name}
-                            onChangeText={text => setName(text)}
-                            keyboardType='default'
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Nome da instituição"
+                        value={name}
+                        onChangeText={text => setName(text)}
+                        keyboardType='default'
+                    />
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="E-mail"
-                            value={email}
-                            onChangeText={text => setEmail(text)}
-                            keyboardType='email-address'
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="E-mail"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        keyboardType='email-address'
+                    />
 
-                    <View style={styles.inputView}>
-                        <TextInputMask
-                            style={styles.inputText}
-                            placeholder="CNPJ"
-                            keyboardType='numeric'
-                            type={'cnpj'}
-                            value={cnpj}
-                            onChangeText={text => setCnpj(text)}
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="CNPJ"
+                        keyboardType="numeric"
+                        value={cnpj}
+                        onChangeText={handleCnpjChange}
+                    />
 
-                    <View style={styles.inputView}
-                        height={100}
-                    >
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Descrição"
-                            value={description}
-                            onChangeText={text => setDescription(text)}
-                            keyboardType='default'
-                            multiline={true}
-                        />
-                    </View>
 
-                    <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Descrição"
+                        value={description}
+                        onChangeText={text => setDescription(text)}
+                        keyboardType='default'
+                        multiline={true}
+                    />
 
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Senha"
-                            value={password}
-                            onChangeText={text => setPassword(text)}
-                            keyboardType='default'
-                            secureTextEntry={!passwordVisible}
-                        />
-                        <FontAwesome
-                            name={passwordVisible ? 'eye-slash' : 'eye'}
-                            size={20}
-                            style={styles.passwordIcon}
-                            onPress={() => setPasswordVisible(!passwordVisible)}
-                        />
-                    </View>
 
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Confirme sua senha"
-                            keyboardType='default'
-                            secureTextEntry={!confirmPasswordVisible}
-                        />
-                        <FontAwesome
-                            name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
-                            size={20}
-                            style={styles.passwordIcon}
-                            onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-                        />
-                    </View>
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Senha"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        keyboardType='default'
+                        secureTextEntry={!passwordVisible}
+                    />
+                    <FontAwesome
+                        name={passwordVisible ? 'eye-slash' : 'eye'}
+                        size={20}
+                        style={styles.passwordIcon}
+                        onPress={() => setPasswordVisible(!passwordVisible)}
+                    />
+
+                    <TextInput
+                        style={styles.inputText}
+                        activeUnderlineColor={'#C693C6'}
+                        label="Confirme sua senha"
+                        keyboardType='default'
+                        secureTextEntry={!confirmPasswordVisible}
+                    />
+                    <FontAwesome
+                        name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
+                        size={20}
+                        style={styles.passwordIcon}
+                        onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                    />
 
                     <TouchableOpacity style={styles.btnRegister} onPress={() => newInstitution()}>
                         <Text style={styles.registerTextBtn}
@@ -187,23 +192,13 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         marginTop: 20,
     },
-    inputView: {
-        width: '85%',
-        backgroundColor: '#E7E7E7',
-        borderRadius: 25,
-        height: 50,
-        marginBottom: 20,
-        justifyContent: 'center',
-        padding: 20,
-        alignSelf: 'center',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     inputText: {
-        flex: 1,
-        height: 80,
-        paddingHorizontal: 10,
-        color: '#000000'
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        marginBottom: 10,
+        backgroundColor: 'transparent',
+        width: '80%'
+
     },
     btnRegister: {
         width: '85%',

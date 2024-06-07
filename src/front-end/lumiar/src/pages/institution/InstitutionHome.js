@@ -152,7 +152,7 @@ export default function InstitutionHome({ route }) {
 
           ]}
           safeAreaInsets={{ bottom }}
-        >
+        > 
           <FAB
             mode="elevated"
             size="medium"
@@ -175,7 +175,7 @@ export default function InstitutionHome({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     paddingHorizontal: 20,
   },
   header: {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Appbar, TextInput } from 'react-native-paper';
 import { firebase } from '../../../config'

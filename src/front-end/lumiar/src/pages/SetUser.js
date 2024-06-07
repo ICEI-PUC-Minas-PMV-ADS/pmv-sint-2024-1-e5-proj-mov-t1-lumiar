@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,7 +12,7 @@ export default function SetUser() {
 
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
                 <Image
-                    source={require('../../assets/Lumiar_branco.png')}
+                    source={require('../../assets/Logo-login.png')}
                     style={styles.imageLogo}
                 />
                 <Text style={styles.txt}>Olá, Selecione uma opção para continuar com o cadastro!</Text>
@@ -36,7 +36,7 @@ export default function SetUser() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E6C7E6',
+        backgroundColor: '#FFF',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         width: 250,
         height: 250,
         resizeMode: 'contain',
-        marginBottom: 100,
+        marginTop: 20,
+        marginBottom: 80,
     },
     txt: {
         fontWeight: 'regular',
