@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 const ChildModel = require('../models/child')
-const { validationDate } = require('../validation')
+const { validationData } = require('../validation')
 
 class Child {
     static validateAndFormatChild(payload) {
-        const { data, errorMessages } = validationDate('child', payload)
+        const formattedPayload = { ...payload, dateBirth: new Date(payload.dateBirth) }
+        const { data, errorMessages } = validationData('child', formattedPayload)
         if (errorMessages) {
             throw {
                 status: 400,
@@ -23,8 +24,13 @@ class Child {
             const body = req.body
 
             Child.validateAndFormatChild(body)
-            const child = await ChildModel.create(body)
 
+            const isValidChild = await ChildModel.findOne({ cpf: body.cpf }).lean()
+            if (isValidChild) {
+                return res.status(404).json({ message: 'Já existe um cpf cadastrado para essa criança' })
+            }
+
+            const child = await ChildModel.create(body)
             return res.status(200).json(child.toObject())
         } catch (error) {
             console.error('Error', error)

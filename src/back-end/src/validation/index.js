@@ -20,6 +20,11 @@ const childSchema = z.object({
     name: z.string(),
     age: z.number().max(16),
     description: z.string(),
+    cpf: z.any().refine((value) => {
+        const isValidCpf = isValidCPF(value)
+        return isValidCpf
+    }),
+    dateBirth: z.date(),
     institution: objectIdSchema,
     address: addressSchema,
 })
@@ -107,7 +112,7 @@ function validateDigit(cpf, expectedDigit, position) {
     return parseInt(cpf.charAt(position)) === expectedDigit
 }
 
-function validationDate(customSchema, data) {
+function validationData(customSchema, data) {
     const hashSchema = {
         sponsor: sponsorSchema,
         institution: institutionSchema,
@@ -121,4 +126,4 @@ function validationDate(customSchema, data) {
     return parsedCustomSchema
 }
 
-module.exports = { validationDate }
+module.exports = { validationData }

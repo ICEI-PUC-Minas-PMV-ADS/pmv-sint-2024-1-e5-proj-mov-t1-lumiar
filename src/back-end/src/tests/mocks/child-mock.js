@@ -13,6 +13,8 @@ module.exports = {
             country: 'USA',
             cep: '12345-678',
         },
+        cpf: '140.334.946-00',
+        dateBirth: new Date('2023-01-01').toISOString(),
         createdAt: new Date('2023-10-15T10:00:00Z'),
         updatedAt: null,
     },

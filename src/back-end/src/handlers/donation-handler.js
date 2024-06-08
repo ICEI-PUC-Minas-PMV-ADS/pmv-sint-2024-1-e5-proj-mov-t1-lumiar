@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const DonationModel = require('../models/donation')
-const { validationDate } = require('../validation')
+const { validationData } = require('../validation')
 const DonationService = require('../services/donation-service')
 
 class Donation {
     static validateAndFormatDonation(payload) {
-        const { data, errorMessages } = validationDate('donation', payload)
+        const { data, errorMessages } = validationData('donation', payload)
         if (errorMessages) {
             throw {
                 status: 400,

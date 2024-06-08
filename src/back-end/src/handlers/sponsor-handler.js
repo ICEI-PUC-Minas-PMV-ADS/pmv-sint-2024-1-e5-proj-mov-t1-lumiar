@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const SponsorModel = require('../models/sponsor')
-const { validationDate } = require('../validation')
+const { validationData } = require('../validation')
 
 class Sponsor {
     static validateAndFormatSponsor(payload) {
-        const { data, errorMessages } = validationDate('sponsor', payload)
+        const { data, errorMessages } = validationData('sponsor', payload)
         if (errorMessages) {
             throw {
                 status: 400,

@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const InstitutionModel = require('../models/institution')
-const { validationDate } = require('../validation')
+const { validationData } = require('../validation')
 
 class Institution {
     static validateAndFormatInstitution(payload) {
         const formattedPayload = { ...payload, creationDate: new Date(payload.creationDate) }
-        const { data, errorMessages } = validationDate('institution', formattedPayload)
+        const { data, errorMessages } = validationData('institution', formattedPayload)
         if (errorMessages) {
             throw {
                 status: 400,

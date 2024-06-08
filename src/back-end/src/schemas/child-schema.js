@@ -6,6 +6,8 @@ module.exports = new Schema({
     description: { type: String, default: null },
     institution: Schema.Types.ObjectId,
     address: { type: Object, default: null },
+    cpf: { type: String, default: null },
+    dateBirth: { type: Date, default: null },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: null },
     image: { type: String, default: null }
