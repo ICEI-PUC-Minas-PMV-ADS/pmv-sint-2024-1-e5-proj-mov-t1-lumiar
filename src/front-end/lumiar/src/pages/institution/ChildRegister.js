@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Appbar, TextInput } from 'react-native-paper';
 import { firebase } from '../../../config'
 import * as FileSystem from 'expo-file-system'
+import { format } from 'date-fns';
 
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native'
@@ -32,44 +33,56 @@ export default function ChildRegister({ route }) {
         if (child) {
             setImage(child.image)
             setName(child.name);
-            setBirthDate(child.birthDate);
+            handleBirthDate(child.dateBirth);
             setCpf(child.cpf);
             setDescription(child.description);
             setCep(child.address.cep);
             setState(child.address.state);
             setCity(child.address.district);
             setAddress(child.address.street);
+
         }
     }, [child]);
 
-    const calculateAge = (date) => {
-        const [day, month, year] = date.split('/').map(Number);
-        const today = new Date();
-        let age = today.getFullYear() - year;
-        const monthDiff = today.getMonth() + 1 - month;
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < day)) {
-            age--;
-        }
-        return age;
-    };
+    const calculateAge = (birthDate) => {
+        const [day, month, year] = birthDate.split('/');
+        const birth = new Date(year, month - 1, day);
+        const ageDifMs = Date.now() - birth.getTime();
+        const ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+      };
 
     const handleBirthDate = (text) => {
-        const formattedText = text.replace(/[^0-9]/g, '');
-        let formattedDate = formattedText;
-        if (formattedText.length > 2 && formattedText.length <= 4) {
-            formattedDate = `${formattedText.slice(0, 2)}/${formattedText.slice(2)}`;
-        } else if (formattedText.length > 4) {
-            formattedDate = `${formattedText.slice(0, 2)}/${formattedText.slice(2, 4)}/${formattedText.slice(4, 8)}`;
+        if (!text) {
+          setBirthDate('');
+          setAge(null);
+          return;
+        }
+    
+        let formattedText = text;
+    
+        const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+        if (isoDateRegex.test(text)) {
+          const date = new Date(text);
+          formattedText = format(date, 'dd/MM/yyyy');
+        }
+    
+        const onlyNumbers = formattedText.replace(/[^0-9]/g, '');
+        let formattedDate = onlyNumbers;
+        if (onlyNumbers.length > 2 && onlyNumbers.length <= 4) {
+          formattedDate = `${onlyNumbers.slice(0, 2)}/${onlyNumbers.slice(2)}`;
+        } else if (onlyNumbers.length > 4) {
+          formattedDate = `${onlyNumbers.slice(0, 2)}/${onlyNumbers.slice(2, 4)}/${onlyNumbers.slice(4, 8)}`;
         }
         setBirthDate(formattedDate);
-
+    
         if (formattedDate.length === 10) {
-            const calculatedAge = calculateAge(formattedDate);
-            setAge(calculatedAge);
+          const calculatedAge = calculateAge(formattedDate);
+          setAge(calculatedAge);
         } else {
-            setAge(null);
+          setAge(null);
         }
-    };
+      };
 
     const handleCepChange = (text) => {
         const formattedText = text.replace(/[^0-9]/g, '');
@@ -125,6 +138,12 @@ export default function ChildRegister({ route }) {
         }
     }
 
+    const convertToISODate = (dateString) => {
+        const [day, month, year] = dateString.split('/');
+        const date = new Date(year, month - 1, day);
+        return date.toISOString();
+      };
+
     const newChild = () => {
         uploadImage
         api.post("child", {
@@ -150,10 +169,13 @@ export default function ChildRegister({ route }) {
     };
 
     const updateChild = () => {
+        const isoDate = convertToISODate(birthDate);
         uploadImage
         api.put(`child/${child._id}`, {
             name: name,
-            age: 7,
+            age: age,
+            dateBirth: isoDate,
+            cpf: cpf,
             description: description,
             institution: userId,
             address: {

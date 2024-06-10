@@ -77,7 +77,6 @@ export default function InstitutionHome({ route }) {
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.age}>{item.age} anos</Text>
         <Text numberOfLines={3}>{item.description}</Text>
-        <Text numberOfLines={3}>{item.cpf}</Text>
 
         {canEdit && (
 
