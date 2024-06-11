@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function EscolhaDeUser() {
     const navigation = useNavigation();
-    const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
 

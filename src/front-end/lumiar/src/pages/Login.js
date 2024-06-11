@@ -37,7 +37,7 @@ export default function Login() {
             console.error('Login failed: ', response.data.message);
           }
         });
-    } else { // Use "else" instead of a second "if (isSwitchOn)"
+    } else {
       api.post("auth/institution/login", {
         email: userName,
         password: password,
@@ -52,7 +52,7 @@ export default function Login() {
     }
   }
 
-  return ( // Move the return statement outside of the login function
+  return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
@@ -64,15 +64,13 @@ export default function Login() {
 
       <View style={styles.formContainer}>
         <Text style={styles.loginTxt}>Login</Text>
-
-        
-          <TextInput
-            style={styles.input}
-            activeUnderlineColor={'#C693C6'}
-            label="Usuário"
-            value={userName}
-            onChangeText={(text) => setUserName(text)}
-          />
+        <TextInput
+          style={styles.input}
+          activeUnderlineColor={'#C693C6'}
+          label="Usuário"
+          value={userName}
+          onChangeText={(text) => setUserName(text)}
+        />
 
           <TextInput
             style={styles.input}
@@ -81,12 +79,13 @@ export default function Login() {
             secureTextEntry={!passwordVisible}
             value={password}
             onChangeText={(text) => setPassword(text)}
-          />
-          <FontAwesome
-            name={passwordVisible ? 'eye-slash' : 'eye'}
-            size={20}
-            style={styles.passwordIcon}
-            onPress={() => setPasswordVisible(!passwordVisible)}
+
+            right={<TextInput.Icon
+              style={styles.icon}
+              icon={passwordVisible ? 'eye-off' : 'eye'}
+              size={25}
+              onPress={() => setPasswordVisible(!passwordVisible)}
+            />}
           />
 
         <View style={styles.setUser}>
@@ -148,8 +147,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10,
     backgroundColor: 'transparent',
-    width: '80%'
-},
+    width: '80%',
+  },
   setUser: {
     width: '80%',
     marginLeft: 10,
@@ -208,8 +207,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     paddingBottom: 10
   },
-  passwordIcon: {
-    paddingBottom: 20,
-    color: '#383839',
-  },
+  icon: {
+    height: '100%',
+    marginTop: 45,
+    alignItems: 'center'
+  }
+ 
 })

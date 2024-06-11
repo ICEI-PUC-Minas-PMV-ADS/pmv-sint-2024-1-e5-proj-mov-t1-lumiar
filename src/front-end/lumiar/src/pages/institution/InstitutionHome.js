@@ -156,12 +156,13 @@ export default function InstitutionHome({ route }) {
             mode="elevated"
             size="medium"
             icon="plus"
+            color="#000"
             onPress={() => navigation.navigate('ChildRegister', {
               userId: userId
             })}
             style={[
               styles.fab,
-              { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+              { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) },
             ]}
           />
         </Appbar>

@@ -321,9 +321,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#FFF'
     },
-    icon: {
-        color: '#000',
-    },
     titleContainer: {
         flexDirection: 'column',
         alignItems: 'flex-start',

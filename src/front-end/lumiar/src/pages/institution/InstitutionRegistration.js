@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesome } from '@expo/vector-icons';
 
 import api from '../../services/api';
 
@@ -112,12 +111,14 @@ export default function InstitutionRegistration() {
                         onChangeText={text => setPassword(text)}
                         keyboardType='default'
                         secureTextEntry={!passwordVisible}
-                    />
-                    <FontAwesome
-                        name={passwordVisible ? 'eye-slash' : 'eye'}
-                        size={20}
-                        style={styles.passwordIcon}
-                        onPress={() => setPasswordVisible(!passwordVisible)}
+                        textContentType="oneTimeCode"
+
+                        right={<TextInput.Icon
+                            style={styles.icon}
+                            icon={passwordVisible ? 'eye-off' : 'eye'}
+                            size={25}
+                            onPress={() => setPasswordVisible(!passwordVisible)}
+                        />}
                     />
 
                     <TextInput
@@ -126,12 +127,14 @@ export default function InstitutionRegistration() {
                         label="Confirme sua senha"
                         keyboardType='default'
                         secureTextEntry={!confirmPasswordVisible}
-                    />
-                    <FontAwesome
-                        name={confirmPasswordVisible ? 'eye-slash' : 'eye'}
-                        size={20}
-                        style={styles.passwordIcon}
-                        onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                        textContentType="oneTimeCode"
+
+                        right={<TextInput.Icon
+                            style={styles.icon}
+                            icon={confirmPasswordVisible ? 'eye-off' : 'eye'}
+                            size={25}
+                            onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                        />}
                     />
 
                     <TouchableOpacity style={styles.btnRegister} onPress={() => newInstitution()}>
@@ -217,8 +220,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 10
     },
-    passwordIcon: {
-        paddingBottom: 20,
-        color: '#383839'
+    icon: {
+        height: '100%',
+        marginTop: 45,
+        alignItems: 'center'
     }
 });

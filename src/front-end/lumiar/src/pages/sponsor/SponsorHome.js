@@ -145,9 +145,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  icon: {
-    color: '#000',
-  },
   address: {
     marginTop: 10,
   },
