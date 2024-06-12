@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
+import React, { useState } from "react";
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Button, Appbar, FAB, useTheme, Menu } from 'react-native-paper';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
@@ -132,7 +132,7 @@ export default function InstitutionHome({ route }) {
 
       {menuVisible &&
         <View style={styles.menu}>
-          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileInstitution')} title="Perfil" />
+          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileInstitution', {id: userId})} title="Perfil" />
           <Menu.Item leadingIcon="logout" onPress={() => navigation.navigate('Login')} title="Sair" />
         </View>
       }
