@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
-import { Button, Appbar, FAB, useTheme, Icon } from 'react-native-paper';
+import { Button, Appbar, FAB, useTheme, Menu } from 'react-native-paper';
 import DeleteDialog from "../../components/deleteDialog/deleteDialog";
 import { KidModal } from "../../components/modal";
 import { useNavigation } from '@react-navigation/native'
@@ -27,6 +27,7 @@ export default function InstitutionHome({ route }) {
   const [visible, setVisible] = React.useState(false);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const showDialog = (childId) => {
     setSelectedChildId(childId)
@@ -66,9 +67,9 @@ export default function InstitutionHome({ route }) {
 
   useFocusEffect(
     React.useCallback(() => {
-        getChildrenList();
+      getChildrenList();
     }, [])
-);
+  );
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => !canEdit && showModal(item._id)} >
@@ -117,12 +118,24 @@ export default function InstitutionHome({ route }) {
       <Appbar.Header style={styles.header}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         {!institutionName &&
-          <Appbar.Content style={styles.titleContainer} title="Crianças Cadastradas" />
+          <View style={styles.menuContainer}>
+            <Appbar.Content style={styles.titleContainer} title="Crianças Cadastradas" />
+            <Appbar.Action icon="menu" onPress={() => setMenuVisible(!menuVisible)} />
+          </View>
+
+
         }
         {institutionName &&
           <Appbar.Content style={styles.titleContainer} title={institutionName} />
         }
       </Appbar.Header>
+
+      {menuVisible &&
+        <View style={styles.menu}>
+          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileInstitution')} title="Perfil" />
+          <Menu.Item leadingIcon="logout" onPress={() => navigation.navigate('Login')} title="Sair" />
+        </View>
+      }
 
       <FlatList
         data={children}
@@ -151,7 +164,7 @@ export default function InstitutionHome({ route }) {
 
           ]}
           safeAreaInsets={{ bottom }}
-        > 
+        >
           <FAB
             mode="elevated"
             size="medium"
@@ -237,4 +250,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     borderRadius: '50'
   },
+  menuContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  menu: {
+    backgroundColor: '#FFF',
+    width: '50%',
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    marginTop: 90,
+    right: 40,
+    zIndex: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 3.84,
+    borderRadius: 5
+  }
 })

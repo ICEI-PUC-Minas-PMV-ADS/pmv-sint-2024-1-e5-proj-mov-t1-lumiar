@@ -8,24 +8,24 @@ import {
   TouchableOpacity,
   Alert,
   SafeAreaView,
+
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
-import { Appbar } from 'react-native-paper';
+import { Appbar, Menu } from 'react-native-paper';
 import { firebase } from '../../../config'
 import * as FileSystem from 'expo-file-system'
 import api from '../../services/api';
 
-import { Button } from 'react-native-paper';
 
 
 export default function SponsorHome({ route }) {
   const navigation = useNavigation();
 
   const [institutions, setInstitutions] = useState([]);
-  const [images, setImage] = useState(null)
-  const [uploading, setUploading] = useState(false)
-
+  const [images, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const uploadMediaFile = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -74,23 +74,30 @@ export default function SponsorHome({ route }) {
     <TouchableOpacity onPress={() => navigation.navigate('InstitutionHome', {
       userId: item._id, institutionName: item.name
     })}>
-        <View style={styles.card}>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <Text style={styles.name}>{item.name}</Text>
-          <Text>{item.description}</Text>
-          <Text style={styles.address}>{item.address.street}</Text>
-          <Text>{item.address.district} - {item.address.state}</Text>
-        </View>
+      <View style={styles.card}>
+        <Image source={{ uri: item.image }} style={styles.image} />
+        <Text style={styles.name}>{item.name}</Text>
+        <Text>{item.description}</Text>
+        <Text style={styles.address}>{item.address.street}</Text>
+        <Text>{item.address.district} - {item.address.state}</Text>
+      </View>
     </TouchableOpacity>
   );
-
 
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.header}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content style={styles.titleContainer} title="Instituições" />
+        <Appbar.Action icon="menu" onPress={() => setMenuVisible(!menuVisible)} />
       </Appbar.Header>
+
+      {menuVisible &&
+        <View style={styles.menu}>
+          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileSponsor')} title="Perfil" />
+          <Menu.Item leadingIcon="logout" onPress={() => navigation.navigate('Login')} title="Sair" />
+        </View>
+      }
 
       <FlatList
         data={institutions}
@@ -148,4 +155,21 @@ const styles = StyleSheet.create({
   address: {
     marginTop: 10,
   },
+  menu: {
+    backgroundColor: '#FFF',
+    width: '50%',
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    marginTop: 90,
+    right: 40,
+    zIndex: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 3.84,
+    borderRadius: 5
+  }
 })
