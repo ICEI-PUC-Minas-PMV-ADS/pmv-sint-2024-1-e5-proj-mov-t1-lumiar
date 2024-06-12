@@ -21,6 +21,7 @@ import api from '../../services/api';
 
 export default function SponsorHome({ route }) {
   const navigation = useNavigation();
+  const userId = route.params.userId;
 
   const [institutions, setInstitutions] = useState([]);
   const [images, setImage] = useState(null);
@@ -94,7 +95,7 @@ export default function SponsorHome({ route }) {
 
       {menuVisible &&
         <View style={styles.menu}>
-          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileSponsor')} title="Perfil" />
+          <Menu.Item leadingIcon="account-circle-outline" onPress={() => navigation.navigate('ProfileSponsor', { id: userId })} title="Perfil" />
           <Menu.Item leadingIcon="logout" onPress={() => navigation.navigate('Login')} title="Sair" />
         </View>
       }

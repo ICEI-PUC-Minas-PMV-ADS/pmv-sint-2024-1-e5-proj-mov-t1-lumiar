@@ -65,8 +65,6 @@ export default function ProfileInstitution({ route }) {
     }, [id]);
 
     return (
-
-
         <View style={styles.main}>
             <Appbar.Header style={styles.header}>
                 <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -87,12 +85,18 @@ export default function ProfileInstitution({ route }) {
                                 onPress={uploadMediaFile}
                             />
                         </View>
-
-
                     ) : (
-                        <Image source={require('../../../assets/user.png')} style={styles.profileImage} />
+                        <View style={styles.imagePickerContainer}>
+                            <Image source={require('../../../assets/user.png')} style={styles.profileImage} />
+                            <FAB
+                                icon="image-edit"
+                                color='#000'
+                                style={styles.fab}
+                                size='small'
+                                onPress={uploadMediaFile}
+                            />
+                        </View>
                     )}
-
 
                     <Text style={styles.greetingText}>Olá, {institution.name}</Text>
 
@@ -123,8 +127,6 @@ export default function ProfileInstitution({ route }) {
                 </View>
 
             )}
-
-
         </View>
     );
 }
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     profileImage: {
         width: 150,
         height: 150,
-        borderRadius: 50,
+        borderRadius: 70,
         marginBottom: 10,
     },
     imagePickerContainer: {
