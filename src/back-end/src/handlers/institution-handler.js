@@ -4,7 +4,10 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const InstitutionModel = require('../models/institution')
+const ChildModel = require('../models/child')
+const DonationModel = require('../models/donation')
 const { validationData } = require('../validation')
+const Donation = require('../models/donation')
 
 class Institution {
     static validateAndFormatInstitution(payload) {
@@ -140,6 +143,39 @@ class Institution {
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
         }
+    }
+
+    static async getAllDonationInInstitution(req, res) {
+        const { id: idInstitution } = req.params
+        if (!mongoose.Types.ObjectId.isValid(idInstitution)) {
+            return res.status(404).json({ message: `${idInstitution} não é um id válido` })
+        }
+
+        try {
+            const childs = await ChildModel.findChilds(idInstitution)
+            if (!childs.length) {
+                return res.status(404).json({
+                    message: `instituição com id ${idInstitution} não aparesenta crianças cadastradas`,
+                })
+            }
+
+            const donations = await Institution.getDonationsPerChild(childs)
+            return res.status(200).json(donations)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
+        }
+    }
+
+    static async getDonationsPerChild(childs) {
+        const childsIds = childs.map(child => child._id);
+        const allDonations = await Donation.find({ child: { $in: childsIds } }).lean();
+
+        const totalDonationsValue = allDonations.reduce((acc, donation) => {
+            const donationValue = donation.value || 0;
+            return acc + donationValue;
+        }, 0);
+
+        return totalDonationsValue;
     }
 
     static async sendEmail(req, res) {

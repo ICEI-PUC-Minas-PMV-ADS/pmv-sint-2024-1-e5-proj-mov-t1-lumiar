@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const ChildModel = require('../models/child')
+const DonationModel = require('../models/donation')
 const { validationData } = require('../validation')
 
 class Child {
@@ -113,6 +114,26 @@ class Child {
                 })
             }
             return res.status(200).json(child)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
+        }
+    }
+
+    static async getAllDonation(req, res) {
+        const { id: idChild } = req.params
+        if (!mongoose.Types.ObjectId.isValid(idChild)) {
+            return res.status(404).json({ message: `${idChild} não é um id válido` })
+        }
+
+        try {
+            const donations = await DonationModel.find({ child: idChild }).lean()
+
+            const sumOfDonations = donations.reduce((acc, donation) => {
+                const donationValue = donation.value || 0;
+                return acc + donationValue;
+            }, 0)
+
+            return res.status(200).json(sumOfDonations)
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
         }

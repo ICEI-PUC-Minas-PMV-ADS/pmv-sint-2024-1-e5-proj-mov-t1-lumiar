@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const SponsorModel = require('../models/sponsor')
+const DonationModel = require('../models/donation')
 const { validationData } = require('../validation')
 
 class Sponsor {
@@ -107,6 +108,26 @@ class Sponsor {
         try {
             const sponsors = await SponsorModel.find().lean()
             return res.status(200).json(sponsors)
+        } catch (error) {
+            return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
+        }
+    }
+
+    static async getAllDonations(req, res) {
+        const { id: idSponsor } = req.params
+        if (!mongoose.Types.ObjectId.isValid(idSponsor)) {
+            return res.status(404).json({ message: `${idSponsor} não é um id válido` })
+        }
+
+        try {
+            const donations = await DonationModel.find({ sponsor: idSponsor }).lean()
+
+            const sumOfDonations = donations.reduce((acc, donation) => {
+                const donationValue = donation.value || 0;
+                return acc + donationValue;
+            }, 0)
+
+            return res.status(200).json(sumOfDonations)
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'falha ao buscar documentos' })
         }
